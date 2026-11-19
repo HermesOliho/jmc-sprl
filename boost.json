@@ -1,21 +1,35 @@
 {
     "agents": [
         "opencode",
-        "amp",
         "antigravity",
         "claude_code",
         "codex",
-        "copilot",
-        "junie",
-        "zed"
+        "copilot"
     ],
     "cloud": false,
     "guidelines": true,
     "mcp": true,
     "nightwatch": false,
+    "packages": [
+        "spatie/laravel-activitylog",
+        "spatie/laravel-medialibrary",
+        "spatie/laravel-backup",
+        "spatie/laravel-pdf",
+        "spatie/laravel-permission",
+        "barryvdh/laravel-debugbar"
+    ],
     "sail": false,
     "skills": [
+        "infer-conventions",
         "laravel-best-practices",
-        "pest-testing"
+        "testing-best-practices",
+        "inertia-vue-development",
+        "tailwindcss-development",
+        "activitylog-development",
+        "laravel-backup",
+        "medialibrary-development",
+        "laravel-pdf",
+        "laravel-permission-development",
+        "debug-using-debugbar"
     ]
 }
