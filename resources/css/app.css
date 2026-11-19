@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+    themes: light --default;
+}
+
+@plugin "@tailwindcss/forms";
+
+@theme {
+    --font-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+
+    --color-ccm-blue: #1a3a5c;
+    --color-ccm-blue-light: #2a5a8c;
+    --color-ccm-blue-dark: #0f2440;
+    --color-ccm-yellow: #d4a843;
+    --color-ccm-yellow-light: #e0c06a;
+    --color-ccm-yellow-dark: #b8922e;
+    --color-ccm-gray-50: #f8f9fa;
+    --color-ccm-gray-100: #f1f3f5;
+    --color-ccm-gray-200: #e9ecef;
+    --color-ccm-gray-300: #dee2e6;
+    --color-ccm-gray-400: #ced4da;
+    --color-ccm-gray-500: #adb5bd;
+    --color-ccm-gray-600: #6c757d;
+    --color-ccm-gray-700: #495057;
+    --color-ccm-gray-800: #343a40;
+    --color-ccm-gray-900: #212529;
+    --color-ccm-anthracite: #2c2c2c;
+
+    --color-primary: var(--color-ccm-blue);
+    --color-primary-light: var(--color-ccm-blue-light);
+    --color-primary-dark: var(--color-ccm-blue-dark);
+    --color-secondary: var(--color-ccm-yellow);
+    --color-secondary-light: var(--color-ccm-yellow-light);
+    --color-secondary-dark: var(--color-ccm-yellow-dark);
+
+    --container-max: 1280px;
+    --container-narrow: 960px;
+    --container-wide: 1440px;
+
+    --breakpoint-xs: 375px;
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-[var(--color-ccm-gray-50)] text-[var(--color-ccm-gray-900)] antialiased;
+    }
+
+    ::selection {
+        @apply bg-[var(--color-ccm-blue)] text-white;
+    }
+
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-[var(--color-ccm-blue)];
+    }
+}

@@ -1,0 +1,6 @@
+export { default as FadeIn } from './FadeIn.vue'
+export { default as SlideUp } from './SlideUp.vue'
+export { default as SlideLeft } from './SlideLeft.vue'
+export { default as SlideRight } from './SlideRight.vue'
+export { default as ScaleIn } from './ScaleIn.vue'
+export { default as Stagger } from './Stagger.vue'
