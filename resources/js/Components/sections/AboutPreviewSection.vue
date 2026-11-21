@@ -4,6 +4,7 @@ import Section from '@/Components/sections/Section.vue'
 import SectionTitle from '@/Components/ui/typography/SectionTitle.vue'
 import Icon from '@/Components/ui/icons/Icon.vue'
 import IconBox from '@/Components/sections/IconBox.vue'
+import BrandIllustration from '@/Components/illustrations/BrandIllustration.vue'
 import OutlineButton from '@/Components/ui/buttons/OutlineButton.vue'
 import FadeIn from '@/Components/animations/FadeIn.vue'
 import SlideLeft from '@/Components/animations/SlideLeft.vue'
@@ -18,13 +19,12 @@ defineProps<{
 <template>
     <Section background="white">
         <div
-            :class="data.image
-                ? 'grid items-center gap-12 lg:grid-cols-2 lg:gap-16'
-                : 'mx-auto max-w-3xl'"
+            class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16"
         >
-            <SlideLeft v-if="data.image">
+            <SlideLeft>
                 <div class="relative">
                     <img
+                        v-if="data.image"
                         :src="data.image"
                         :alt="data.title"
                         class="w-full rounded-2xl object-cover shadow-lg"
@@ -32,6 +32,15 @@ defineProps<{
                         height="600"
                         loading="lazy"
                     />
+                    <div
+                        v-else
+                        class="overflow-hidden rounded-2xl bg-[var(--color-brand-navy-dark)] p-5 shadow-lg md:p-8"
+                    >
+                        <BrandIllustration variant="organization" />
+                        <p class="mt-2 text-center text-xs font-medium tracking-wide text-white/60">
+                            Illustration conceptuelle
+                        </p>
+                    </div>
                 </div>
             </SlideLeft>
 

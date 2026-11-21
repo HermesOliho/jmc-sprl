@@ -9,6 +9,7 @@ import ValuesGrid from '@/Components/sections/ValuesGrid.vue'
 import MissionSection from '@/Components/sections/MissionSection.vue'
 import FeaturesSection from '@/Components/sections/FeaturesSection.vue'
 import TeamSection from '@/Components/sections/TeamSection.vue'
+import BrandIllustration from '@/Components/illustrations/BrandIllustration.vue'
 import {
     ABOUT_HERO,
     ABOUT_PRESENTATION,
@@ -38,17 +39,26 @@ withDefaults(
             :title="ABOUT_HERO.title"
             :subtitle="ABOUT_HERO.subtitle"
             :breadcrumbs="[{ label: 'Accueil', href: '/' }, { label: 'À propos' }]"
+            illustration="organization"
         />
 
         <Section background="white">
-            <div class="mx-auto max-w-3xl">
-                <SectionTitle :as="2" align="left" subtitle="Qui sommes-nous ?">
-                    {{ ABOUT_PRESENTATION.title }}
-                </SectionTitle>
-                <div class="space-y-4 text-base leading-relaxed text-[var(--color-content-muted)]">
-                    <p v-for="(paragraph, i) in ABOUT_PRESENTATION.content.split('\n\n')" :key="i">
-                        {{ paragraph.trim() }}
+            <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+                <div class="overflow-hidden rounded-2xl bg-[var(--color-brand-navy-dark)] p-5 shadow-lg md:p-8">
+                    <BrandIllustration variant="organization" />
+                    <p class="mt-2 text-center text-xs font-medium tracking-wide text-white/60">
+                        Illustration conceptuelle
                     </p>
+                </div>
+                <div>
+                    <SectionTitle :as="2" align="left" subtitle="Qui sommes-nous ?">
+                        {{ ABOUT_PRESENTATION.title }}
+                    </SectionTitle>
+                    <div class="space-y-4 text-base leading-relaxed text-[var(--color-content-muted)]">
+                        <p v-for="(paragraph, i) in ABOUT_PRESENTATION.content.split('\n\n')" :key="i">
+                            {{ paragraph.trim() }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </Section>

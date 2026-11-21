@@ -4,7 +4,7 @@ import { animate } from 'motion-v'
 import { onMounted, ref } from 'vue'
 import Container from '@/Components/ui/Container.vue'
 import Icon from '@/Components/ui/icons/Icon.vue'
-import BrandLogo from '@/Components/common/BrandLogo.vue'
+import BrandIllustration from '@/Components/illustrations/BrandIllustration.vue'
 import { useSite } from '@/composables'
 import { classNames } from '@/utils'
 import type { HomeHero } from '@/types'
@@ -58,8 +58,8 @@ onMounted(() => {
             style="background-image: radial-gradient(circle at 50% 50%, white 1px, transparent 1px); background-size: 40px 40px;"
         />
         <Container class="relative z-10 py-24 md:py-32">
-            <div ref="contentRef" class="lg:flex lg:items-center lg:gap-16">
-                <div class="flex-1">
+            <div ref="contentRef" class="grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(20rem,0.9fr)] lg:gap-16">
+                <div>
                     <span
                         class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur-sm"
                     >
@@ -99,8 +99,13 @@ onMounted(() => {
                         </Link>
                     </div>
                 </div>
-                <div class="hidden shrink-0 lg:block">
-                    <BrandLogo variant="dark" context="hero" alt="" />
+                <div class="mx-auto w-full max-w-md lg:max-w-none">
+                    <div class="overflow-hidden rounded-[2rem] border border-white/15 bg-white/5 p-4 shadow-2xl shadow-black/20 backdrop-blur-sm md:p-6">
+                        <BrandIllustration variant="construction" class="w-full" />
+                    </div>
+                    <p class="mt-3 text-center text-xs font-medium tracking-wide text-white/60">
+                        Illustration conceptuelle · Construction et infrastructures
+                    </p>
                 </div>
             </div>
             <div

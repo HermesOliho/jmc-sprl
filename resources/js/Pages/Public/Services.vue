@@ -31,6 +31,7 @@ const differentiators = [
             :title="SERVICES_HERO.title"
             :subtitle="SERVICES_HERO.subtitle"
             :breadcrumbs="[{ label: 'Accueil', href: '/' }, { label: 'Services' }]"
+            illustration="construction"
         />
 
         <Section background="gray" id="liste">

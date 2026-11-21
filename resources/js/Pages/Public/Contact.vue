@@ -28,6 +28,7 @@ const site = useSite()
             :title="CONTACT_HERO.title"
             :subtitle="CONTACT_HERO.subtitle"
             :breadcrumbs="[{ label: 'Accueil', href: '/' }, { label: 'Contact' }]"
+            illustration="location"
         />
 
         <Section background="white">
@@ -60,7 +61,7 @@ const site = useSite()
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <Icon :name="s.icon" :size="18" />
+                                <Icon :name="s.icon ?? 'globe'" :size="18" />
                             </a>
                         </div>
                     </FadeIn>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { classNames } from '@/utils'
 import Icon from '@/Components/ui/icons/Icon.vue'
+import ServiceIllustration from '@/Components/illustrations/ServiceIllustration.vue'
 
 defineProps<{
     title: string
@@ -17,6 +18,7 @@ defineProps<{
             $props.class,
         )"
     >
+        <ServiceIllustration v-if="icon" :icon="icon" />
         <div
             v-if="icon"
             class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--color-action)]/10 transition-colors duration-200 group-hover:bg-[var(--color-action)]"

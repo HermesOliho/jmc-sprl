@@ -2,6 +2,7 @@
 import Section from '@/Components/sections/Section.vue'
 import SlideLeft from '@/Components/animations/SlideLeft.vue'
 import SlideRight from '@/Components/animations/SlideRight.vue'
+import BrandIllustration from '@/Components/illustrations/BrandIllustration.vue'
 import type { MissionVision } from '@/types'
 
 defineProps<{
@@ -12,13 +13,10 @@ defineProps<{
 
 <template>
     <Section :background="reversed ? 'gray' : 'white'">
-        <div
-            :class="data.image
-                ? 'grid items-center gap-12 lg:grid-cols-2 lg:gap-16'
-                : 'mx-auto max-w-3xl'"
-        >
-            <SlideLeft v-if="data.image && !reversed">
+        <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            <SlideLeft :class="reversed ? 'lg:order-2' : ''">
                 <img
+                    v-if="data.image"
                     :src="data.image"
                     :alt="data.title"
                     class="w-full rounded-2xl object-cover shadow-lg"
@@ -26,9 +24,15 @@ defineProps<{
                     height="600"
                     loading="lazy"
                 />
+                <div v-else class="overflow-hidden rounded-2xl bg-[var(--color-brand-navy-dark)] p-5 shadow-lg md:p-8">
+                    <BrandIllustration :variant="reversed ? 'planning' : 'construction'" />
+                    <p class="mt-2 text-center text-xs font-medium tracking-wide text-white/60">
+                        Illustration conceptuelle
+                    </p>
+                </div>
             </SlideLeft>
 
-            <SlideRight :class="data.image && !reversed ? 'order-first' : ''">
+            <SlideRight :class="reversed ? 'lg:order-1' : ''">
                 <h2 class="text-3xl font-bold tracking-tight text-[var(--color-content)] md:text-4xl">
                     {{ data.title }}
                 </h2>
@@ -45,16 +49,6 @@ defineProps<{
                 </div>
             </SlideRight>
 
-            <SlideLeft v-if="data.image && reversed">
-                <img
-                    :src="data.image"
-                    :alt="data.title"
-                    class="w-full rounded-2xl object-cover shadow-lg"
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                />
-            </SlideLeft>
         </div>
     </Section>
 </template>

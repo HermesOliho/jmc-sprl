@@ -150,7 +150,7 @@ function scrollToTop() {
                         class="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition-all duration-200 hover:border-[var(--color-brand-orange-light)] hover:text-[var(--color-brand-orange-light)]"
                         :aria-label="social.name"
                     >
-                        <Icon :name="social.icon" :size="16" />
+                        <Icon :name="social.icon ?? 'globe'" :size="16" />
                     </a>
                 </div>
             </div>
