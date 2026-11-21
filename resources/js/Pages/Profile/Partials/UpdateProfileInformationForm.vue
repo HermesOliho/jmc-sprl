@@ -21,12 +21,12 @@ const form = useForm({
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Profile Information
+            <h2 class="text-lg font-medium text-[var(--color-content)]">
+                Informations du profil
             </h2>
 
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Update your account's profile information and email address.
+            <p class="mt-1 text-sm text-[var(--color-content-muted)]">
+                Mettez à jour les informations de votre compte et votre adresse e-mail.
             </p>
         </header>
 
@@ -35,7 +35,7 @@ const form = useForm({
             class="mt-6 space-y-6"
         >
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Nom" />
 
                 <TextInput
                     id="name"
@@ -51,7 +51,7 @@ const form = useForm({
             </div>
 
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="E-mail" />
 
                 <TextInput
                     id="email"
@@ -66,28 +66,28 @@ const form = useForm({
             </div>
 
             <div v-if="mustVerifyEmail && user?.email_verified_at === null">
-                <p class="mt-2 text-sm text-gray-800 dark:text-gray-200">
-                    Your email address is unverified.
+                <p class="mt-2 text-sm text-[var(--color-content)]">
+                    Votre adresse e-mail n’est pas vérifiée.
                     <Link
                         :href="route('verification.send')"
                         method="post"
                         as="button"
-                        class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                        class="rounded-md text-sm text-[var(--color-content-muted)] underline hover:text-[var(--color-content)] focus:outline-none focus:ring-2 focus:ring-[var(--color-action)] focus:ring-offset-2"
                     >
-                        Click here to re-send the verification email.
+                        Cliquez ici pour renvoyer l’e-mail de vérification.
                     </Link>
                 </p>
 
                 <div
                     v-show="status === 'verification-link-sent'"
-                    class="mt-2 text-sm font-medium text-green-600 dark:text-green-400"
+                    class="mt-2 text-sm font-medium text-[var(--color-success)]"
                 >
-                    A new verification link has been sent to your email address.
+                    Un nouveau lien de vérification a été envoyé à votre adresse e-mail.
                 </div>
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <PrimaryButton :disabled="form.processing">Enregistrer</PrimaryButton>
 
                 <Transition
                     enter-active-class="transition ease-in-out"
@@ -97,9 +97,9 @@ const form = useForm({
                 >
                     <p
                         v-if="form.recentlySuccessful"
-                        class="text-sm text-gray-600 dark:text-gray-400"
+                        class="text-sm text-[var(--color-content-muted)]"
                     >
-                        Saved.
+                        Enregistrerd.
                     </p>
                 </Transition>
             </div>

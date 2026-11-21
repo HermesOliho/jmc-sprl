@@ -23,26 +23,26 @@ const typeConfig = computed(() => {
     switch (props.type) {
         case 'success':
             return {
-                bg: 'bg-green-50 border-green-200',
-                text: 'text-green-800',
+                bg: 'bg-[var(--color-success)]/10 border-[var(--color-success)]/30',
+                text: 'text-[var(--color-success)]',
                 icon: 'circle-check',
             }
         case 'warning':
             return {
-                bg: 'bg-amber-50 border-amber-200',
-                text: 'text-amber-800',
+                bg: 'bg-[var(--color-warning)]/10 border-[var(--color-warning)]/30',
+                text: 'text-[var(--color-warning)]',
                 icon: 'triangle-alert',
             }
         case 'error':
             return {
-                bg: 'bg-red-50 border-red-200',
-                text: 'text-red-800',
+                bg: 'bg-[var(--color-error)]/10 border-[var(--color-error)]/30',
+                text: 'text-[var(--color-error)]',
                 icon: 'circle-x',
             }
         default:
             return {
-                bg: 'bg-blue-50 border-blue-200',
-                text: 'text-blue-800',
+                bg: 'bg-[var(--color-info)]/10 border-[var(--color-info)]/30',
+                text: 'text-[var(--color-info)]',
                 icon: 'info',
             }
     }

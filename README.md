@@ -1,474 +1,98 @@
-# 🏗️ CCM SARL – Portail Web Institutionnel
+# JMC Services S.P.R.L — Site institutionnel
 
-> Plateforme web officielle de **CONGO CONSTRUCTION & MÉTALLIQUE SARL (CCM SARL)** développée avec **Laravel 13**, **Vue 3**, **TypeScript**, **Inertia.js** et **Tailwind CSS**.
+Site web institutionnel de **JMC Services S.P.R.L**, construit avec Laravel, Inertia.js, Vue 3, TypeScript, Tailwind CSS et daisyUI.
 
----
+## Stack
 
-## 📖 À propos
+- PHP 8.5 / Laravel 13
+- Inertia.js 3 / Vue 3 / TypeScript
+- Tailwind CSS 4 / daisyUI 5
+- Vite 8
+- Pest / Pint
 
-Le portail web de **CCM SARL** est une plateforme institutionnelle moderne destinée à renforcer la présence numérique de l'entreprise.
+## Pages publiques
 
-Elle permet notamment de :
+- `/` — accueil
+- `/a-propos` — présentation, valeurs et approche
+- `/services` — services et FAQ
+- `/contact` — coordonnées et formulaire
+- `/mentions-legales` — structure à compléter par la direction
+- `/politique-de-confidentialite` — structure à compléter par la direction
 
-- Présenter l'entreprise
-- Présenter les services
-- Valoriser les réalisations
-- Recevoir les demandes de devis
-- Gérer les candidatures
-- Publier les actualités
-- Fournir un espace client sécurisé
-- Mettre en avant les partenaires et investisseurs
+Les anciennes entrées `/demande-devis`, `/realisations`, `/carrieres` et `/actualites` sont redirigées vers les pages correspondantes.
 
-Le projet est conçu pour être **évolutif**, **sécurisé**, **performant** et conforme aux bonnes pratiques Laravel.
+## Fonctionnalités
 
----
+- Thème clair et thème sombre avec détection de la préférence système, bascule manuelle et persistance locale.
+- Formulaire de contact avec validation serveur, limitation de débit et envoi par e-mail.
+- Métadonnées SEO rendues côté serveur (title, description, canonical, Open Graph, Twitter Cards, JSON-LD).
+- Sitemap XML et `robots.txt`.
+- Espace d'administration pour les utilisateurs et les partenaires.
+- Carrousel de partenaires alimenté par la base de données.
 
-# ✨ Fonctionnalités
+## Configuration
 
-## 🌐 Site public
+Copier `.env.example` vers `.env`, puis renseigner au minimum :
 
-- Accueil
-- À propos
-- Services
-- Réalisations
-- Parc d'équipements
-- Actualités
-- Carrières
-- Demande de devis
-- Contact
-- Galerie
-- Téléchargements
+```dotenv
+APP_NAME="JMC Services S.P.R.L"
+APP_URL=https://www.jmcservices.com
+APP_LOCALE=fr
 
----
-
-## 👤 Espace client
-
-- Tableau de bord
-- Suivi des projets
-- Téléchargement des documents
-- Rapports
-- Factures
-- Historique
-- Profil
-
----
-
-## ⚙️ Administration
-
-- Gestion des utilisateurs
-- Gestion des rôles
-- Gestion des permissions
-- Gestion des services
-- Gestion des réalisations
-- Gestion des actualités
-- Gestion des candidatures
-- Gestion des devis
-- Gestion documentaire
-- Paramètres du site
-- Tableau de bord statistique
-
----
-
-# 🛠️ Stack technique
-
-## Backend
-
-- Laravel 13
-- PHP 8.x
-- MySQL 8
-- Redis
-- Laravel Queue
-- Laravel Scheduler
-- Laravel Notifications
-
----
-
-## Frontend
-
-- Vue 3
-- TypeScript
-- Inertia.js
-- Tailwind CSS
-- DaisyUI
-- Motion for Vue
-- ApexCharts
-
----
-
-## Packages principaux
-
-- spatie/laravel-permission
-- spatie/laravel-medialibrary
-- spatie/laravel-activitylog
-- spatie/laravel-backup
-- spatie/laravel-sitemap
-- spatie/laravel-pdf
-- ralphjsmit/laravel-seo
-
----
-
-## Outils de développement
-
-- Vite
-- Composer
-- npm
-- Laravel Pint
-- ESLint
-- Prettier
-- PHPStan
-- Pest
-
----
-
-# 🏛️ Architecture
-
-```
-Internet
-    │
-Laravel 13
-    │
-───────────────
-│             │
-Blade      Inertia
-│             │
-│         Vue 3
-│             │
-───────────────
-    │
- Services
-    │
- MySQL
+CONTACT_TO_ADDRESS=contact@jmcservices.com
+MAIL_FROM_ADDRESS=contact@jmcservices.com
+MAIL_FROM_NAME="${APP_NAME}"
 ```
 
----
+Configurer également le transport SMTP de production (hôte, port, identifiants) et les enregistrements SPF/DKIM/DMARC du domaine.
 
-# 📁 Structure du projet
+La source de vérité des informations institutionnelles se trouve dans `config/site.php` : nom, slogan, description, coordonnées, téléphones, WhatsApp, e-mail, site web, réseaux sociaux et métadonnées des pages.
 
-```
-app/
-bootstrap/
-config/
-database/
-public/
-resources/
-│
-├── css/
-├── js/
-│   ├── Components/
-│   ├── Composables/
-│   ├── Layouts/
-│   ├── Pages/
-│   ├── Stores/
-│   ├── Types/
-│   ├── Utils/
-│   └── App.ts
-│
-├── views/
-│
-routes/
-storage/
-tests/
+### Inscription publique
+
+L'inscription publique est désactivée par défaut :
+
+```dotenv
+AUTH_REGISTRATION_ENABLED=false
 ```
 
----
+Le compte administrateur est créé par le seeder. En production, définir `ADMIN_EMAIL` et un `ADMIN_PASSWORD` robuste avant `php artisan db:seed`. Ne réactiver l'inscription que si un parcours client réel est prévu.
 
-# 🔐 Authentification
-
-Le projet utilise l'authentification native de Laravel.
-
-Fonctionnalités :
-
-- Connexion
-- Déconnexion
-- Réinitialisation du mot de passe
-- Vérification d'email
-- Sessions sécurisées
-
----
-
-# 🛡️ Gestion des rôles
-
-Les autorisations sont gérées grâce à **Spatie Laravel Permission**.
-
-## Rôles
-
-- Super Administrateur
-- Administrateur
-- Responsable Technique
-- Responsable Commercial
-- Responsable RH
-- Rédacteur
-- Client
-- Partenaire
-- Investisseur
-
-Les permissions sont attribuées de manière granulaire.
-
----
-
-# 📂 Gestion des fichiers
-
-Le système permet le téléversement de :
-
-- Images
-- PDF
-- Plans DWG
-- DOCX
-- XLSX
-- ZIP
-- MP4
-
-Fonctionnalités :
-
-- Drag & Drop
-- Barre de progression
-- Prévisualisation
-- Validation
-- Téléversement multiple
-
----
-
-# 📊 Tableau de bord
-
-Les statistiques sont générées avec **ApexCharts**.
-
-Exemples :
-
-- Évolution des devis
-- Répartition des projets
-- Candidatures
-- Visites
-- Nouveaux clients
-
----
-
-# 🎨 Interface utilisateur
-
-Le design repose sur :
-
-- Tailwind CSS
-- DaisyUI
-- Motion for Vue
-
-Objectifs :
-
-- Responsive
-- Moderne
-- Rapide
-- Accessible
-
----
-
-# 🚀 Installation
-
-## Cloner le dépôt
-
-```bash
-git clone <repository-url>
-```
-
----
-
-## Installer les dépendances PHP
+## Développement
 
 ```bash
 composer install
-```
-
----
-
-## Installer les dépendances JavaScript
-
-```bash
 npm install
-```
-
----
-
-## Copier le fichier d'environnement
-
-```bash
 cp .env.example .env
-```
-
----
-
-## Générer la clé
-
-```bash
 php artisan key:generate
-```
-
----
-
-## Configurer la base de données
-
-Modifier le fichier `.env`.
-
----
-
-## Exécuter les migrations
-
-```bash
-php artisan migrate
-```
-
----
-
-## (Optionnel) Seeder
-
-```bash
-php artisan db:seed
-```
-
----
-
-## Créer le lien de stockage
-
-```bash
-php artisan storage:link
-```
-
----
-
-## Lancer le serveur
-
-Backend :
-
-```bash
-php artisan serve
-```
-
-Frontend :
-
-```bash
+php artisan migrate --seed
 npm run dev
 ```
 
----
-
-# 🧪 Tests
-
-Exécuter tous les tests :
+ou :
 
 ```bash
-php artisan test
+composer run dev
 ```
 
-ou
+## Tests et qualité
 
 ```bash
-./vendor/bin/pest
-```
-
----
-
-# 🎯 Qualité de code
-
-Formatage PHP :
-
-```bash
-./vendor/bin/pint
-```
-
-Analyse statique :
-
-```bash
-./vendor/bin/phpstan analyse
-```
-
-Formatage JavaScript :
-
-```bash
-npm run lint
-```
-
----
-
-# 📦 Déploiement
-
-Build frontend :
-
-```bash
+php artisan test --compact
 npm run build
+vendor/bin/pint --dirty --format agent
 ```
 
-Optimisations Laravel :
+## Structure utile
 
-```bash
-php artisan optimize
-```
+- `config/site.php` — identité et métadonnées institutionnelles
+- `resources/js/config/` — contenus des pages et navigation
+- `resources/js/Components/common/SeoHead.vue` — métadonnées côté client après navigation Inertia
+- `resources/css/app.css` — thèmes daisyUI et tokens de design
+- `resources/views/app.blade.php` — métadonnées initiales rendues côté serveur
+- `public/` — logos, favicons, manifest et image Open Graph
+- `docs/rebranding-ccm-to-jmc/` — audit et plan de migration (documentation interne)
 
-Mise en cache :
+## Licence
 
-```bash
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-```
-
----
-
-# 🔒 Sécurité
-
-Le projet applique les bonnes pratiques Laravel :
-
-- Protection CSRF
-- Validation serveur
-- Protection XSS
-- Prévention des injections SQL
-- Rate Limiting
-- HTTPS
-- Journalisation des activités
-- Sauvegardes automatiques
-
----
-
-# 📈 Roadmap
-
-Version 1
-
-- ✅ Site institutionnel
-- ✅ Blog
-- ✅ Réalisations
-- ✅ Demande de devis
-- ✅ Recrutement
-- ✅ Administration
-- ✅ Espace client
-
-Version 2
-
-- Portail partenaires
-- Paiement en ligne
-- Signature électronique
-- Tableau de bord BI
-- API publique
-
-Version 3
-
-- Application Flutter
-- Notifications Push
-- Chat temps réel
-- Assistant IA
-
----
-
-# 👨‍💻 Développement
-
-Projet développé avec ❤️ par :
-
-**Hermès Matabishi**
-
-Full Stack Web & Mobile Developer
-
----
-
-# 📄 Licence
-
-Projet propriétaire.
-
-Tous droits réservés à **CONGO CONSTRUCTION & MÉTALLIQUE SARL (CCM SARL)**.
-
-Toute reproduction ou distribution sans autorisation est interdite.
-
----
+Projet propriétaire. Tous droits réservés à JMC Services S.P.R.L.

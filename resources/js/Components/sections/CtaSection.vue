@@ -15,7 +15,7 @@ defineProps<{
 </script>
 
 <template>
-    <section class="bg-gradient-to-r from-[var(--color-ccm-blue)] to-[var(--color-ccm-blue-dark)] py-16 md:py-20">
+    <section class="bg-gradient-to-r from-[var(--color-brand-navy)] to-[var(--color-brand-navy-dark)] py-16 md:py-20">
         <Container class="text-center">
             <h2 class="text-3xl font-bold text-white md:text-4xl">
                 {{ title }}
@@ -25,7 +25,7 @@ defineProps<{
             </p>
             <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link :href="buttonHref">
-                    <PrimaryButton size="lg" class="bg-[var(--color-ccm-yellow)] text-[var(--color-ccm-blue-dark)] hover:bg-[var(--color-ccm-yellow-light)]">
+                    <PrimaryButton size="lg" class="bg-[var(--color-brand-orange)] text-[var(--color-on-accent)] hover:bg-[var(--color-brand-orange-light)]">
                         <Icon name="arrow-right" :size="20" />
                         {{ buttonLabel }}
                     </PrimaryButton>

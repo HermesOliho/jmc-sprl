@@ -101,6 +101,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Contact form recipient
+    |--------------------------------------------------------------------------
+    |
+    | Address that receives messages sent from the public contact form.
+    | Leave empty in local development; the application will fall back to
+    | the global "from" address and the message will be written to the log
+    | mailer until a real mailbox is configured.
+    |
+    */
+
+    'contact_to' => env('CONTACT_TO_ADDRESS', 'contact@jmcservices.com'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Global "From" Address
     |--------------------------------------------------------------------------
     |
@@ -111,7 +125,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'contact@jmcservices.com'),
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 

@@ -68,6 +68,7 @@ Tous les documents utilisent la même convention :
 | 6 | [`06-informations-a-valider.md`](./06-informations-a-valider.md) | Direction JMC, chef de projet |
 | 7 | [`07-plan-complet-de-migration.md`](./07-plan-complet-de-migration.md) | Chef de projet et agent d'implémentation |
 | 8 | [`08-checklist-validation.md`](./08-checklist-validation.md) | QA, développeur, responsable de mise en production |
+| 9 | [`09-rapport-implementation.md`](./09-rapport-implementation.md) | Suivi de l'implémentation et points restants |
 
 **Parcours minimal avant de coder :** `06` (décisions) → `04` (système visuel) → `07` (plan) → `08` (critères de recette).
 

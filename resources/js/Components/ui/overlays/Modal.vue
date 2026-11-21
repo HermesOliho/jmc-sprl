@@ -90,7 +90,7 @@ onUnmounted(() => {
                 />
                 <div
                     :class="classNames(
-                        'relative w-full rounded-xl bg-white shadow-xl transition-all duration-200',
+                        'relative w-full rounded-xl bg-[var(--color-surface)] shadow-xl transition-all duration-200',
                         widthClass,
                         showing ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
                         $props.class,
@@ -98,15 +98,15 @@ onUnmounted(() => {
                 >
                     <div
                         v-if="title"
-                        class="flex items-center justify-between border-b border-[var(--color-ccm-gray-200)] px-6 py-4"
+                        class="flex items-center justify-between border-b border-[var(--color-border)] px-6 py-4"
                     >
-                        <h2 class="text-lg font-semibold text-[var(--color-ccm-gray-900)]">
+                        <h2 class="text-lg font-semibold text-[var(--color-content)]">
                             {{ title }}
                         </h2>
                         <button
                             v-if="closeable"
                             type="button"
-                            class="rounded-lg p-1 text-[var(--color-ccm-gray-400)] hover:bg-[var(--color-ccm-gray-100)] hover:text-[var(--color-ccm-gray-600)]"
+                            class="rounded-lg p-1 text-[var(--color-content-placeholder)] hover:bg-[var(--color-surface-elevated)] hover:text-[var(--color-content-muted)]"
                             aria-label="Fermer"
                             @click="close"
                         >

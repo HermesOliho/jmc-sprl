@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
-const model = defineModel<string>({ required: true });
+const model = defineModel<string | number>({ required: true });
 
 const input = ref<HTMLInputElement | null>(null);
 
@@ -16,7 +16,7 @@ defineExpose({ focus: () => input.value?.focus() });
 
 <template>
     <input
-        class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600"
+        class="rounded-md border-[var(--color-border-strong)] bg-[var(--color-surface)] text-[var(--color-content)] shadow-sm focus:border-[var(--color-action)] focus:ring-[var(--color-action)]"
         v-model="model"
         ref="input"
     />

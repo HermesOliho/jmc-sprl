@@ -29,7 +29,7 @@ import { computed } from 'vue'
 <template>
     <div
         :class="classNames(
-            'rounded-xl border border-[var(--color-ccm-gray-200)] bg-white shadow-sm',
+            'rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm',
             hover && 'transition-all duration-200 hover:shadow-md hover:-translate-y-0.5',
             paddingClass,
             $props.class,

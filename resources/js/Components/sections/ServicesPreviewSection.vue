@@ -30,8 +30,8 @@ defineProps<{
                 >
                     <div class="mt-4">
                         <Link
-                            :href="`/services#${service.title.toLowerCase().replace(/\s+/g, '-')}`"
-                            class="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-ccm-blue)] transition-colors hover:text-[var(--color-ccm-blue-light)]"
+                            :href="`/services#${service.slug}`"
+                            class="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-link)] transition-colors hover:text-[var(--color-action-hover)]"
                         >
                             En savoir plus
                             <Icon name="chevron-right" :size="16" />

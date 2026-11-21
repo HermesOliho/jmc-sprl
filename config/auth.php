@@ -92,6 +92,18 @@ return [
     |
     */
 
+    /*
+    |--------------------------------------------------------------------------
+    | Public registration
+    |--------------------------------------------------------------------------
+    |
+    | The institutional site does not expose a public sign-up journey.
+    | Keep registration disabled unless a real client area is launched.
+    |
+    */
+
+    'registration_enabled' => (bool) env('AUTH_REGISTRATION_ENABLED', false),
+
     'passwords' => [
         'users' => [
             'provider' => 'users',

@@ -17,8 +17,12 @@ defineProps<{
 
 <template>
     <Section background="white">
-        <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <SlideLeft>
+        <div
+            :class="data.image
+                ? 'grid items-center gap-12 lg:grid-cols-2 lg:gap-16'
+                : 'mx-auto max-w-3xl'"
+        >
+            <SlideLeft v-if="data.image">
                 <div class="relative">
                     <img
                         :src="data.image"
@@ -28,19 +32,16 @@ defineProps<{
                         height="600"
                         loading="lazy"
                     />
-                    <div
-                        class="absolute -bottom-4 -right-4 hidden h-24 w-24 rounded-2xl border-8 border-white bg-[var(--color-ccm-yellow)] lg:block"
-                    />
                 </div>
             </SlideLeft>
 
             <SlideRight>
                 <SectionTitle :as="2" align="left" :subtitle="data.title">
-                    Une entreprise congolaise au service du développement
+                    Notre présentation
                 </SectionTitle>
 
                 <FadeIn :delay="0.2">
-                    <p class="text-base leading-relaxed text-[var(--color-ccm-gray-600)] md:text-lg">
+                    <p class="text-base leading-relaxed text-[var(--color-content-muted)] md:text-lg">
                         {{ data.content }}
                     </p>
                 </FadeIn>

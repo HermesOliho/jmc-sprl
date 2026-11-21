@@ -26,7 +26,7 @@ const sizeClass = computed(() => {
         role="status"
         aria-label="Chargement"
         :class="classNames(
-            'animate-spin rounded-full border-[var(--color-ccm-gray-200)] border-t-[var(--color-ccm-blue)]',
+            'animate-spin rounded-full border-[var(--color-border)] border-t-[var(--color-brand-navy)]',
             sizeClass,
             $props.class,
         )"

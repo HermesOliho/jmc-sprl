@@ -10,43 +10,32 @@ defineProps<{
 </script>
 
 <template>
-    <div class="group overflow-hidden rounded-xl border border-[var(--color-ccm-gray-200)] bg-white shadow-sm transition-all duration-200 hover:shadow-md">
-        <div class="relative aspect-[16/9] overflow-hidden">
-            <img
-                :src="service.image"
-                :alt="service.title"
-                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                width="800"
-                height="600"
-                loading="lazy"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-            <div
-                class="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-lg"
-            >
-                <Icon :name="service.icon" :size="24" class="text-[var(--color-ccm-blue)]" />
+    <div class="group flex h-full flex-col overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm transition-all duration-200 hover:shadow-md">
+        <div class="flex items-center gap-4 border-b border-[var(--color-border)] bg-[var(--color-surface-muted)] p-6">
+            <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[var(--color-action)] text-white">
+                <Icon :name="service.icon" :size="26" />
             </div>
-        </div>
-
-        <div class="p-6">
-            <h3 class="text-xl font-bold text-[var(--color-ccm-gray-900)]">
+            <h3 class="text-xl font-bold text-[var(--color-content)]">
                 {{ service.title }}
             </h3>
-            <p class="mt-2 text-sm leading-relaxed text-[var(--color-ccm-gray-600)]">
+        </div>
+
+        <div class="flex flex-1 flex-col p-6">
+            <p class="text-sm leading-relaxed text-[var(--color-content-muted)]">
                 {{ service.description }}
             </p>
 
             <div v-if="service.deliverables?.length" class="mt-5">
-                <h4 class="mb-2 text-sm font-semibold uppercase tracking-wider text-[var(--color-ccm-gray-700)]">
+                <h4 class="mb-2 text-sm font-semibold uppercase tracking-wider text-[var(--color-content)]">
                     Nos prestations
                 </h4>
                 <ul class="space-y-1.5">
                     <li
                         v-for="item in service.deliverables"
                         :key="item"
-                        class="flex items-start gap-2 text-sm text-[var(--color-ccm-gray-600)]"
+                        class="flex items-start gap-2 text-sm text-[var(--color-content-muted)]"
                     >
-                        <Icon name="circle-check" :size="16" class="mt-0.5 shrink-0 text-[var(--color-ccm-blue)]" />
+                        <Icon name="circle-check" :size="16" class="mt-0.5 shrink-0 text-[var(--color-link)]" />
                         {{ item }}
                     </li>
                 </ul>
@@ -56,24 +45,17 @@ defineProps<{
                 <Badge
                     v-for="benefit in service.benefits"
                     :key="benefit"
-                    variant="primary"
+                    variant="default"
                     size="sm"
                 >
                     {{ benefit }}
                 </Badge>
             </div>
 
-            <div class="mt-6 pt-4 border-t border-[var(--color-ccm-gray-200)] flex items-center gap-3">
+            <div class="mt-auto border-t border-[var(--color-border)] pt-5">
                 <Link
-                    :href="`/services/${service.slug}`"
-                    class="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-ccm-blue)] transition-colors hover:text-[var(--color-ccm-blue-light)]"
-                >
-                    En savoir plus
-                    <Icon name="arrow-right" :size="14" />
-                </Link>
-                <Link
-                    :href="`/contact?subject=${service.slug}`"
-                    class="inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-ccm-yellow)] px-4 py-2 text-sm font-semibold text-[var(--color-ccm-blue-dark)] transition-colors hover:bg-[var(--color-ccm-yellow-light)]"
+                    :href="`/contact?subject=devis&service=${service.slug}`"
+                    class="inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-brand-orange)] px-4 py-2 text-sm font-semibold text-[var(--color-on-accent)] transition-colors hover:bg-[var(--color-brand-orange-light)]"
                 >
                     Demander un devis
                     <Icon name="arrow-right" :size="14" />

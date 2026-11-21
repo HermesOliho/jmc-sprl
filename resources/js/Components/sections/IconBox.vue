@@ -13,13 +13,13 @@ defineProps<{
 <template>
     <div :class="classNames('flex gap-4', $props.class)">
         <div
-            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[var(--color-ccm-blue)]/10"
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[var(--color-action)]/10"
         >
-            <Icon :name="icon" :size="24" class="text-[var(--color-ccm-blue)]" />
+            <Icon :name="icon" :size="24" class="text-[var(--color-link)]" />
         </div>
         <div>
-            <h3 class="font-semibold text-[var(--color-ccm-gray-900)]">{{ title }}</h3>
-            <p v-if="description" class="mt-1 text-sm text-[var(--color-ccm-gray-600)]">
+            <h3 class="font-semibold text-[var(--color-content)]">{{ title }}</h3>
+            <p v-if="description" class="mt-1 text-sm text-[var(--color-content-muted)]">
                 {{ description }}
             </p>
         </div>

@@ -15,7 +15,7 @@ defineProps<{
 <template>
     <section
         :class="classNames(
-            'relative overflow-hidden bg-[var(--color-ccm-blue)] py-16 md:py-24',
+            'relative overflow-hidden bg-[var(--color-brand-navy)] py-16 md:py-24',
             $props.class,
         )"
     >

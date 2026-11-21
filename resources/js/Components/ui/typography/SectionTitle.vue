@@ -33,13 +33,13 @@ import { computed } from 'vue'
     <div :class="classNames('mb-12', align === 'center' && 'text-center', align === 'right' && 'text-right')">
         <component
             :is="tag"
-            :class="classNames('font-bold tracking-tight text-[var(--color-ccm-gray-900)]', sizeClass, $props.class)"
+            :class="classNames('font-bold tracking-tight text-[var(--color-content)]', sizeClass, $props.class)"
         >
             <slot />
         </component>
         <p
             v-if="subtitle"
-            class="mx-auto mt-4 max-w-2xl text-lg text-[var(--color-ccm-gray-600)]"
+            class="mx-auto mt-4 max-w-2xl text-lg text-[var(--color-content-muted)]"
         >
             {{ subtitle }}
         </p>

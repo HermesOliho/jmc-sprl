@@ -21,17 +21,15 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Forgot Password" />
+        <Head title="Mot de passe oublié" />
 
-        <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-            Forgot your password? No problem. Just let us know your email
-            address and we will email you a password reset link that will allow
-            you to choose a new one.
+        <div class="mb-4 text-sm text-[var(--color-content-muted)]">
+            Mot de passe oublié ? Indiquez votre adresse e-mail : nous vous enverrons un lien pour choisir un nouveau mot de passe.
         </div>
 
         <div
             v-if="status"
-            class="mb-4 text-sm font-medium text-green-600 dark:text-green-400"
+            class="mb-4 text-sm font-medium text-[var(--color-success)]"
         >
             {{ status }}
         </div>
@@ -58,7 +56,7 @@ const submit = () => {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Email Password Reset Link
+                    Envoyer le lien de réinitialisation
                 </PrimaryButton>
             </div>
         </form>

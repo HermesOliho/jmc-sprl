@@ -15,13 +15,13 @@ const props = withDefaults(defineProps<{
 const bgClass = computed(() => {
     switch (props.background) {
         case 'gray':
-            return 'bg-[var(--color-ccm-gray-50)]'
+            return 'bg-[var(--color-surface-muted)]'
         case 'blue':
-            return 'bg-[var(--color-ccm-blue)] text-white'
+            return 'bg-[var(--color-brand-navy)] text-white'
         case 'none':
             return ''
         default:
-            return 'bg-white'
+            return 'bg-[var(--color-surface)]'
     }
 })
 

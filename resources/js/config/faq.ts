@@ -2,23 +2,23 @@ import type { FaqItem } from '@/types'
 
 export const CONTACT_FAQ: FaqItem[] = [
     {
-        question: 'Quels sont vos délais de réponse ?',
+        question: 'Comment nous contacter ?',
         answer:
-            'Nous nous engageons à répondre à toutes les demandes de devis sous 48 heures ouvrées. Pour les demandes urgentes, nous vous invitons à nous contacter directement par téléphone.',
+            'Utilisez le formulaire de contact pour présenter votre demande. Vous pouvez préciser le sujet afin que votre message soit orienté vers la bonne personne.',
     },
     {
-        question: 'Comment puis-je suivre ma demande ?',
+        question: 'Quel délai de réponse prévoir ?',
         answer:
-            'Dès réception de votre message, vous recevrez un accusé de réception automatique. Notre équipe commerciale vous contactera ensuite personnellement pour échanger sur votre projet.',
+            'Nous répondons dès que possible. Le délai dépend de la nature et de la complexité de la demande.',
     },
     {
-        question: 'Intervenez-vous en urgence ?',
+        question: 'Puis-je joindre des documents ?',
         answer:
-            'Oui, nous disposons d\'une équipe d\'intervention rapide pour les situations urgentes (dépannage, sinistre, mise en sécurité). Contactez-nous par téléphone pour une prise en charge immédiate.',
+            'Le formulaire ne permet pas encore de joindre des fichiers. Indiquez dans votre message les documents disponibles ; nous vous indiquerons comment les transmettre.',
     },
     {
-        question: 'Puis-vous visiter le site avant le devis ?',
+        question: 'Comment se déroule une première prise de contact ?',
         answer:
-            'Bien sûr. Pour les projets d\'envergure, nous organisons systématiquement une visite technique sur site afin d\'établir un devis précis et adapté à vos besoins réels.',
+            'Nous revenons vers vous pour préciser votre besoin, vérifier les informations disponibles et convenir des prochaines étapes.',
     },
 ]

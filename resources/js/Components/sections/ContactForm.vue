@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
-import Container from '@/Components/ui/Container.vue'
+import { computed, onMounted, ref } from 'vue'
+import { useForm, usePage } from '@inertiajs/vue3'
 import TextInput from '@/Components/ui/inputs/TextInput.vue'
 import TextArea from '@/Components/ui/inputs/TextArea.vue'
 import PrimaryButton from '@/Components/ui/buttons/PrimaryButton.vue'
 import Icon from '@/Components/ui/icons/Icon.vue'
-import { CONTACT_SUBJECTS } from '@/config/contact'
-import type { ContactFormData } from '@/types'
+import { useSite } from '@/composables'
+import { ALL_SERVICES } from '@/config/services'
 
-const form = reactive<ContactFormData>({
+const site = useSite()
+const page = usePage()
+
+const form = useForm({
     name: '',
     company: '',
     email: '',
@@ -16,128 +19,177 @@ const form = reactive<ContactFormData>({
     subject: '',
     message: '',
     consent: false,
+    website: '',
 })
 
-const errors = reactive<Partial<Record<keyof ContactFormData, string>>>({})
+const flash = computed(() => page.props.flash as { status?: string; error?: string } | undefined)
+const successMessage = ref('')
 
-function validate(): boolean {
-    Object.keys(errors).forEach((k) => delete errors[k as keyof ContactFormData])
-
-    if (!form.name.trim()) errors.name = 'Le nom est requis.'
-    if (!form.email.trim()) {
-        errors.email = 'L\'email est requis.'
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-        errors.email = 'Email invalide.'
+onMounted(() => {
+    if (typeof window === 'undefined') {
+        return
     }
-    if (!form.subject) errors.subject = 'Veuillez choisir un sujet.'
-    if (!form.message.trim()) errors.message = 'Le message est requis.'
-    if (!form.consent) errors.consent = 'Vous devez accepter le traitement de vos données.'
 
-    return Object.keys(errors).length === 0
-}
+    const params = new URLSearchParams(window.location.search)
+    const subject = params.get('subject')
+    const service = params.get('service')
 
-function handleSubmit() {
-    if (!validate()) return
-    console.log('Form submitted (placeholder):', { ...form })
+    if (subject && site.contact_subjects.some((item) => item.value === subject)) {
+        form.subject = subject
+    }
+
+    if (service) {
+        const selected = ALL_SERVICES.find((item) => item.slug === service)
+
+        if (selected && !form.message) {
+            form.subject = form.subject || 'devis'
+            form.message = `Je souhaite obtenir un devis pour le service : ${selected.title}.`
+        }
+    }
+})
+
+function submit(): void {
+    successMessage.value = ''
+    form.post('/contact', {
+        preserveScroll: true,
+        onSuccess: (page) => {
+            const incoming = page.props.flash as { status?: string; error?: string } | undefined
+            successMessage.value = incoming?.error ? '' : (incoming?.status ?? 'Votre message a bien été transmis.')
+            form.reset('name', 'company', 'email', 'phone', 'subject', 'message', 'consent', 'website')
+        },
+    })
 }
 </script>
 
 <template>
-    <form class="space-y-5" @submit.prevent="handleSubmit" novalidate>
-        <div class="grid gap-5 sm:grid-cols-2">
-            <TextInput
-                v-model="form.name"
-                label="Nom complet"
-                placeholder="Votre nom"
-                required
-                :error="errors.name"
-            />
-            <TextInput
-                v-model="form.company"
-                label="Entreprise"
-                placeholder="Votre entreprise (optionnel)"
-            />
+    <div>
+        <div
+            v-if="successMessage || flash?.status"
+            class="mb-5 rounded-lg border border-[var(--color-success)]/30 bg-[var(--color-success)]/10 px-4 py-3 text-sm text-[var(--color-success)]"
+            role="status"
+        >
+            {{ successMessage || flash?.status }}
+        </div>
+        <div
+            v-if="flash?.error"
+            class="mb-5 rounded-lg border border-[var(--color-error)]/30 bg-[var(--color-error)]/10 px-4 py-3 text-sm text-[var(--color-error)]"
+            role="alert"
+        >
+            {{ flash.error }}
         </div>
 
-        <div class="grid gap-5 sm:grid-cols-2">
-            <TextInput
-                v-model="form.email"
-                label="Email"
-                type="email"
-                placeholder="votre@email.com"
-                required
-                :error="errors.email"
-            />
-            <TextInput
-                v-model="form.phone"
-                label="Téléphone"
-                type="tel"
-                placeholder="+243 XX XXX XXXX"
-            />
-        </div>
-
-        <div>
-            <label class="mb-1.5 block text-sm font-medium text-[var(--color-ccm-gray-700)]">
-                Sujet
-                <span class="text-red-500">*</span>
-            </label>
-            <select
-                v-model="form.subject"
-                class="block w-full rounded-lg border border-[var(--color-ccm-gray-300)] bg-white px-4 py-3 text-sm text-[var(--color-ccm-gray-900)] transition-all duration-200 focus:border-[var(--color-ccm-blue)] focus:ring-2 focus:ring-[var(--color-ccm-blue)]/20 focus:outline-none"
-                :class="{ 'border-red-300': errors.subject }"
-                aria-label="Sujet"
-            >
-                <option value="" disabled>Sélectionnez un sujet</option>
-                <option
-                    v-for="s in CONTACT_SUBJECTS"
-                    :key="s.value"
-                    :value="s.value"
-                >
-                    {{ s.label }}
-                </option>
-            </select>
-            <p
-                v-if="errors.subject"
-                class="mt-1 text-sm text-red-600"
-                role="alert"
-            >
-                {{ errors.subject }}
-            </p>
-        </div>
-
-        <TextArea
-            v-model="form.message"
-            label="Message"
-            placeholder="Décrivez votre projet ou votre demande..."
-            :rows="5"
-            required
-            :error="errors.message"
-        />
-
-        <div>
-            <label class="flex items-start gap-3">
+        <form class="space-y-5" @submit.prevent="submit" novalidate>
+            <div class="hidden" aria-hidden="true">
+                <label for="website">Site web</label>
                 <input
-                    v-model="form.consent"
-                    type="checkbox"
-                    class="mt-1 h-4 w-4 rounded border-[var(--color-ccm-gray-300)] text-[var(--color-ccm-blue)] focus:ring-[var(--color-ccm-blue)]"
+                    id="website"
+                    v-model="form.website"
+                    type="text"
+                    tabindex="-1"
+                    autocomplete="off"
                 />
-                <span class="text-sm text-[var(--color-ccm-gray-600)]">
-                    J'accepte que mes données soient traitées pour répondre à ma demande.
-                    <span class="text-red-500">*</span>
-                </span>
-            </label>
-            <p
-                v-if="errors.consent"
-                class="mt-1 text-sm text-red-600"
-                role="alert"
-            >
-                {{ errors.consent }}
-            </p>
-        </div>
+            </div>
 
-        <PrimaryButton type="submit" size="lg">
-            <Icon name="send" :size="18" />
-            Envoyer le message
-        </PrimaryButton>
-    </form>
+            <div class="grid gap-5 sm:grid-cols-2">
+                <TextInput
+                    v-model="form.name"
+                    label="Nom complet"
+                    placeholder="Votre nom"
+                    required
+                    :error="form.errors.name"
+                />
+                <TextInput
+                    v-model="form.company"
+                    label="Entreprise"
+                    placeholder="Votre entreprise (optionnel)"
+                    :error="form.errors.company"
+                />
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+                <TextInput
+                    v-model="form.email"
+                    label="E-mail"
+                    type="email"
+                    placeholder="votre@email.com"
+                    required
+                    :error="form.errors.email"
+                />
+                <TextInput
+                    v-model="form.phone"
+                    label="Téléphone"
+                    type="tel"
+                    placeholder="+243 XX XXX XXXX"
+                    :error="form.errors.phone"
+                />
+            </div>
+
+            <div>
+                <label for="subject" class="mb-1.5 block text-sm font-medium text-[var(--color-content)]">
+                    Sujet
+                    <span class="text-[var(--color-error)]">*</span>
+                </label>
+                <select
+                    id="subject"
+                    v-model="form.subject"
+                    class="block w-full rounded-lg border border-[var(--color-border-strong)] bg-[var(--color-surface)] px-4 py-3 text-sm text-[var(--color-content)] transition-all duration-200 focus:border-[var(--color-action)] focus:ring-2 focus:ring-[var(--color-action)]/20 focus:outline-none"
+                    :aria-invalid="!!form.errors.subject"
+                    :aria-describedby="form.errors.subject ? 'subject-error' : undefined"
+                    required
+                >
+                    <option value="" disabled>Sélectionnez un sujet</option>
+                    <option
+                        v-for="subject in site.contact_subjects"
+                        :key="subject.value"
+                        :value="subject.value"
+                    >
+                        {{ subject.label }}
+                    </option>
+                </select>
+                <p
+                    v-if="form.errors.subject"
+                    id="subject-error"
+                    class="mt-1 text-sm text-[var(--color-error)]"
+                    role="alert"
+                >
+                    {{ form.errors.subject }}
+                </p>
+            </div>
+
+            <TextArea
+                v-model="form.message"
+                label="Message"
+                placeholder="Décrivez votre projet ou votre demande..."
+                :rows="6"
+                required
+                :error="form.errors.message"
+            />
+
+            <div>
+                <label class="flex items-start gap-3">
+                    <input
+                        v-model="form.consent"
+                        type="checkbox"
+                        class="mt-1 h-4 w-4 rounded border-[var(--color-border-strong)] text-[var(--color-action)] focus:ring-[var(--color-action)]"
+                    />
+                    <span class="text-sm text-[var(--color-content-muted)]">
+                        J'accepte que mes données soient traitées pour répondre à ma demande.
+                        <span class="text-[var(--color-error)]">*</span>
+                    </span>
+                </label>
+                <p
+                    v-if="form.errors.consent"
+                    class="mt-1 text-sm text-[var(--color-error)]"
+                    role="alert"
+                >
+                    {{ form.errors.consent }}
+                </p>
+            </div>
+
+            <PrimaryButton type="submit" size="lg" :disabled="form.processing">
+                <Icon name="send" :size="18" />
+                {{ form.processing ? 'Envoi en cours…' : 'Envoyer le message' }}
+            </PrimaryButton>
+        </form>
+    </div>
 </template>

@@ -21,30 +21,30 @@ function toggle(index: number) {
         <div
             v-for="(item, index) in items"
             :key="index"
-            class="overflow-hidden rounded-xl border border-[var(--color-ccm-gray-200)] bg-white shadow-sm transition-all duration-200"
+            class="overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm transition-all duration-200"
         >
             <button
                 type="button"
-                class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left transition-colors hover:bg-[var(--color-ccm-gray-50)]"
+                class="flex w-full items-center justify-between gap-4 px-6 py-4 text-left transition-colors hover:bg-[var(--color-surface-muted)]"
                 :aria-expanded="openIndex === index"
                 :aria-controls="`faq-answer-${index}`"
                 @click="toggle(index)"
             >
-                <span class="text-base font-semibold text-[var(--color-ccm-gray-900)]">
+                <span class="text-base font-semibold text-[var(--color-content)]">
                     {{ item.question }}
                 </span>
                 <Icon
                     :name="openIndex === index ? 'x' : 'chevron-right'"
                     :size="18"
-                    class="shrink-0 text-[var(--color-ccm-blue)] transition-transform duration-200"
+                    class="shrink-0 text-[var(--color-link)] transition-transform duration-200"
                 />
             </button>
             <div
                 :id="`faq-answer-${index}`"
                 v-show="openIndex === index"
-                class="border-t border-[var(--color-ccm-gray-200)] px-6 py-4"
+                class="border-t border-[var(--color-border)] px-6 py-4"
             >
-                <p class="text-sm leading-relaxed text-[var(--color-ccm-gray-600)]">
+                <p class="text-sm leading-relaxed text-[var(--color-content-muted)]">
                     {{ item.answer }}
                 </p>
             </div>

@@ -38,8 +38,8 @@ const sizeClass = computed(() => {
         :disabled="disabled || loading"
         :class="classNames(
             'rounded-lg font-medium transition-all duration-200',
-            'text-[var(--color-ccm-gray-600)] hover:bg-[var(--color-ccm-gray-100)] hover:text-[var(--color-ccm-blue)]',
-            'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-ccm-blue)]',
+            'text-[var(--color-content-muted)] hover:bg-[var(--color-surface-elevated)] hover:text-[var(--color-link)]',
+            'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-action)]',
             'disabled:cursor-not-allowed disabled:opacity-50',
             'inline-flex items-center justify-center gap-2',
             sizeClass,

@@ -2,17 +2,19 @@
 import Container from '@/Components/ui/Container.vue';
 import PrimaryButton from '@/Components/ui/buttons/PrimaryButton.vue';
 import Icon from '@/Components/ui/icons/Icon.vue';
-import { useScroll } from '@/composables';
+import BrandLogo from '@/Components/common/BrandLogo.vue';
+import { useScroll, useSite, useTheme } from '@/composables';
 import { NAVIGATION } from '@/config/navigation';
 import { useAppStore } from '@/stores';
 import { classNames } from '@/utils';
 import { Link, usePage } from '@inertiajs/vue3';
 import { ref, watch } from 'vue';
-import logoSrc from '../../../images/logo.png';
 
 const { isScrolled, scrollDirection } = useScroll();
+const { isDark, toggle } = useTheme();
 const appStore = useAppStore();
 const page = usePage();
+const site = useSite();
 
 const isHidden = ref(false);
 
@@ -35,37 +37,25 @@ function isActive(href: string): boolean {
     <header
         :class="
             classNames(
-                'fixed top-0 right-0 left-0 z-40 transition-all duration-700 ease-in-out',
+                'fixed top-0 right-0 left-0 z-40 border-b border-[var(--color-border)] transition-all duration-500 ease-in-out',
                 isScrolled
-                    ? 'bg-white/80 shadow-sm backdrop-blur-2xl'
-                    : 'bg-white/70 backdrop-blur-md',
+                    ? 'bg-[var(--color-surface)]/90 shadow-sm backdrop-blur-xl'
+                    : 'bg-[var(--color-surface)]/80 backdrop-blur-md',
                 isHidden ? '-translate-y-full' : 'translate-y-0',
             )
         "
     >
         <Container>
             <nav
-                class="flex h-20 items-center justify-between"
+                class="flex h-20 items-center justify-between gap-4"
                 aria-label="Navigation principale"
             >
                 <Link
                     href="/"
-                    class="flex shrink-0 items-center gap-3"
-                    aria-label="Accueil CCM SARL"
+                    class="flex shrink-0 items-center"
+                    :aria-label="`Accueil ${site.name}`"
                 >
-                    <img :src="logoSrc" alt="CCM SARL" class="h-10 w-auto" />
-                    <div class="hidden sm:block">
-                        <span
-                            class="text-lg font-bold tracking-tight text-[var(--color-ccm-blue)]"
-                        >
-                            CCM
-                        </span>
-                        <span
-                            class="block text-[10px] leading-tight font-medium tracking-wider text-[var(--color-ccm-blue)]/60 uppercase"
-                        >
-                            Congo Construction &amp; Métallique
-                        </span>
-                    </div>
+                    <BrandLogo context="header" />
                 </Link>
 
                 <div class="hidden items-center gap-1 lg:flex">
@@ -77,8 +67,8 @@ function isActive(href: string): boolean {
                             classNames(
                                 'rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200',
                                 isActive(item.href)
-                                    ? 'bg-[var(--color-ccm-blue)]/10 text-[var(--color-ccm-blue)]'
-                                    : 'text-[var(--color-ccm-blue)]/70 hover:bg-[var(--color-ccm-blue)]/10 hover:text-[var(--color-ccm-blue)]',
+                                    ? 'bg-[var(--color-action)]/10 text-[var(--color-link)]'
+                                    : 'text-[var(--color-content-muted)] hover:bg-[var(--color-action)]/10 hover:text-[var(--color-link)]',
                             )
                         "
                         :aria-current="isActive(item.href) ? 'page' : undefined"
@@ -87,11 +77,21 @@ function isActive(href: string): boolean {
                     </Link>
                 </div>
 
-                <div class="flex items-center gap-3">
-                    <Link href="/demande-devis" class="hidden lg:block">
+                <div class="flex items-center gap-2">
+                    <button
+                        type="button"
+                        class="rounded-lg p-2.5 text-[var(--color-content-muted)] transition-colors hover:bg-[var(--color-action)]/10 hover:text-[var(--color-link)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)]"
+                        :aria-label="isDark ? 'Activer le thème clair' : 'Activer le thème sombre'"
+                        :aria-pressed="isDark"
+                        @click="toggle"
+                    >
+                        <Icon :name="isDark ? 'sun' : 'moon'" :size="20" />
+                    </button>
+
+                    <Link href="/contact?subject=devis" class="hidden lg:block">
                         <PrimaryButton
                             size="sm"
-                            class="bg-[var(--color-ccm-yellow)] text-[var(--color-ccm-blue-dark)] hover:bg-[var(--color-ccm-yellow-light)]"
+                            class="bg-[var(--color-brand-orange)] text-[var(--color-on-accent)] hover:bg-[var(--color-brand-orange-light)]"
                         >
                             Demander un devis
                             <Icon name="arrow-right" :size="16" />
@@ -100,8 +100,9 @@ function isActive(href: string): boolean {
 
                     <button
                         type="button"
-                        class="rounded-lg p-2 text-[var(--color-ccm-blue)] transition-colors hover:bg-[var(--color-ccm-blue)]/10 lg:hidden"
+                        class="rounded-lg p-2 text-[var(--color-content-muted)] transition-colors hover:bg-[var(--color-action)]/10 hover:text-[var(--color-link)] lg:hidden"
                         aria-label="Menu"
+                        aria-controls="mobile-navigation"
                         :aria-expanded="appStore.isMobileMenuOpen"
                         @click="appStore.toggleMobileMenu()"
                     >
@@ -124,7 +125,8 @@ function isActive(href: string): boolean {
         >
             <div
                 v-if="appStore.isMobileMenuOpen"
-                class="border-t border-[var(--color-ccm-gray-200)] bg-white lg:hidden"
+                id="mobile-navigation"
+                class="border-t border-[var(--color-border)] bg-[var(--color-surface)] lg:hidden"
             >
                 <Container class="py-4">
                     <div class="flex flex-col gap-1">
@@ -132,9 +134,9 @@ function isActive(href: string): boolean {
                             v-for="item in NAVIGATION"
                             :key="item.href"
                             :href="item.href"
-                            class="rounded-lg px-4 py-3 text-sm font-medium text-[var(--color-ccm-gray-700)] transition-colors hover:bg-[var(--color-ccm-gray-100)] hover:text-[var(--color-ccm-blue)]"
+                            class="rounded-lg px-4 py-3 text-sm font-medium text-[var(--color-content)] transition-colors hover:bg-[var(--color-surface-elevated)] hover:text-[var(--color-link)]"
                             :class="{
-                                'bg-[var(--color-ccm-blue)]/10 font-semibold text-[var(--color-ccm-blue)]':
+                                'bg-[var(--color-action)]/10 font-semibold text-[var(--color-link)]':
                                     isActive(item.href),
                             }"
                             :aria-current="
@@ -146,14 +148,14 @@ function isActive(href: string): boolean {
                         </Link>
                     </div>
                     <div
-                        class="mt-4 border-t border-[var(--color-ccm-gray-200)] pt-4"
+                        class="mt-4 border-t border-[var(--color-border)] pt-4"
                     >
                         <Link
-                            href="/demande-devis"
+                            href="/contact?subject=devis"
                             @click="appStore.closeMobileMenu()"
                         >
                             <PrimaryButton
-                                class="w-full bg-[var(--color-ccm-yellow)] text-[var(--color-ccm-blue-dark)] hover:bg-[var(--color-ccm-yellow-light)]"
+                                class="w-full bg-[var(--color-brand-orange)] text-[var(--color-on-accent)] hover:bg-[var(--color-brand-orange-light)]"
                             >
                                 Demander un devis
                                 <Icon name="arrow-right" :size="16" />

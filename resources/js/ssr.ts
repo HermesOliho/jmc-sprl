@@ -6,13 +6,10 @@ import { createSSRApp, DefineComponent, h } from 'vue'
 import { createPinia } from 'pinia'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy'
 
-const appName = import.meta.env.VITE_APP_NAME || 'CCM SARL'
-
 createServer((page) =>
     createInertiaApp({
         page,
         render: renderToString,
-        title: (title) => `${title} — ${appName}`,
         resolve: (name) =>
             resolvePageComponent(
                 `./Pages/${name}.vue`,

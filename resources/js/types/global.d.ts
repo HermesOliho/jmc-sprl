@@ -43,6 +43,13 @@ declare module '@inertiajs/core' {
                     email: string
                     email_verified_at: string | null
                 } | null
+                can: {
+                    accessAdmin: boolean
+                }
+            }
+            flash: {
+                status: string | null
+                error: string | null
             }
         }
     }

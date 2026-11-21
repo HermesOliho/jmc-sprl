@@ -15,19 +15,19 @@ const props = withDefaults(defineProps<{
 const variantClass = computed(() => {
     switch (props.variant) {
         case 'primary':
-            return 'bg-[var(--color-ccm-blue)] text-white'
+            return 'bg-[var(--color-action)] text-white'
         case 'secondary':
-            return 'bg-[var(--color-ccm-yellow)] text-[var(--color-ccm-blue-dark)]'
+            return 'bg-[var(--color-brand-orange)] text-[var(--color-on-accent)]'
         case 'success':
-            return 'bg-green-100 text-green-800'
+            return 'bg-[var(--color-success)]/15 text-[var(--color-success)]'
         case 'warning':
-            return 'bg-amber-100 text-amber-800'
+            return 'bg-[var(--color-warning)]/15 text-[var(--color-warning)]'
         case 'error':
-            return 'bg-red-100 text-red-800'
+            return 'bg-[var(--color-error)]/15 text-[var(--color-error)]'
         case 'info':
-            return 'bg-blue-100 text-blue-800'
+            return 'bg-[var(--color-info)]/15 text-[var(--color-info)]'
         default:
-            return 'bg-[var(--color-ccm-gray-200)] text-[var(--color-ccm-gray-700)]'
+            return 'bg-[var(--color-border)] text-[var(--color-content)]'
     }
 })
 

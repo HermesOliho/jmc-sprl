@@ -1,35 +1,37 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import BrandLogo from '@/Components/common/BrandLogo.vue';
+import Icon from '@/Components/ui/icons/Icon.vue';
+import { useTheme } from '@/composables/useTheme';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
+const { isDark, toggle } = useTheme();
 </script>
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <Head>
+            <meta name="robots" content="noindex, nofollow" />
+        </Head>
+
+        <div class="min-h-screen bg-[var(--color-surface-muted)]">
             <nav
-                class="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800"
+                class="border-b border-[var(--color-border)] bg-[var(--color-surface)]"
             >
-                <!-- Primary Navigation Menu -->
                 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div class="flex h-16 justify-between">
                         <div class="flex">
-                            <!-- Logo -->
                             <div class="flex shrink-0 items-center">
                                 <Link :href="route('dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
-                                    />
+                                    <BrandLogo context="header" class="h-9 w-auto" />
                                 </Link>
                             </div>
 
-                            <!-- Navigation Links -->
                             <div
                                 class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
                             >
@@ -37,20 +39,44 @@ const showingNavigationDropdown = ref(false);
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
                                 >
-                                    Dashboard
+                                    Tableau de bord
+                                </NavLink>
+                                <NavLink
+                                    v-if="$page.props.auth.can.accessAdmin"
+                                    :href="route('admin.users.index')"
+                                    :active="route().current('admin.users.*')"
+                                >
+                                    Utilisateurs
+                                </NavLink>
+                                <NavLink
+                                    v-if="$page.props.auth.can.accessAdmin"
+                                    :href="route('admin.partners.index')"
+                                    :active="route().current('admin.partners.*')"
+                                >
+                                    Partenaires
                                 </NavLink>
                             </div>
                         </div>
 
-                        <div class="hidden sm:ms-6 sm:flex sm:items-center">
-                            <!-- Settings Dropdown -->
+                        <div class="flex items-center gap-2 sm:ms-6">
+                            <button
+                                type="button"
+                                class="rounded-lg p-2 text-[var(--color-content-muted)] transition-colors hover:bg-[var(--color-surface-elevated)] hover:text-[var(--color-content)]"
+                                :aria-label="isDark ? 'Activer le thème clair' : 'Activer le thème sombre'"
+                                :aria-pressed="isDark"
+                                @click="toggle"
+                            >
+                                <Icon :name="isDark ? 'sun' : 'moon'" :size="18" />
+                            </button>
+
+                            <div class="hidden sm:flex sm:items-center">
                             <div class="relative ms-3">
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
+                                                class="inline-flex items-center rounded-md border border-transparent bg-[var(--color-surface)] px-3 py-2 text-sm font-medium leading-4 text-[var(--color-content-muted)] transition duration-150 ease-in-out hover:text-[var(--color-content)] focus:outline-none"
                                             >
                                                 {{ $page.props.auth.user?.name }}
 
@@ -74,28 +100,30 @@ const showingNavigationDropdown = ref(false);
                                         <DropdownLink
                                             :href="route('profile.edit')"
                                         >
-                                            Profile
+                                            Profil
                                         </DropdownLink>
                                         <DropdownLink
                                             :href="route('logout')"
                                             method="post"
                                             as="button"
                                         >
-                                            Log Out
+                                            Déconnexion
                                         </DropdownLink>
                                     </template>
                                 </Dropdown>
                             </div>
+                            </div>
                         </div>
 
-                        <!-- Hamburger -->
                         <div class="-me-2 flex items-center sm:hidden">
                             <button
                                 @click="
                                     showingNavigationDropdown =
                                         !showingNavigationDropdown
                                 "
-                                class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400"
+                                class="inline-flex items-center justify-center rounded-md p-2 text-[var(--color-content-muted)] transition duration-150 ease-in-out hover:bg-[var(--color-surface-elevated)] focus:outline-none"
+                                aria-label="Menu"
+                                :aria-expanded="showingNavigationDropdown"
                             >
                                 <svg
                                     class="h-6 w-6"
@@ -131,7 +159,6 @@ const showingNavigationDropdown = ref(false);
                     </div>
                 </div>
 
-                <!-- Responsive Navigation Menu -->
                 <div
                     :class="{
                         block: showingNavigationDropdown,
@@ -144,44 +171,56 @@ const showingNavigationDropdown = ref(false);
                             :href="route('dashboard')"
                             :active="route().current('dashboard')"
                         >
-                            Dashboard
+                            Tableau de bord
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            v-if="$page.props.auth.can.accessAdmin"
+                            :href="route('admin.users.index')"
+                            :active="route().current('admin.users.*')"
+                        >
+                            Utilisateurs
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            v-if="$page.props.auth.can.accessAdmin"
+                            :href="route('admin.partners.index')"
+                            :active="route().current('admin.partners.*')"
+                        >
+                            Partenaires
                         </ResponsiveNavLink>
                     </div>
 
-                    <!-- Responsive Settings Options -->
                     <div
-                        class="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600"
+                        class="border-t border-[var(--color-border)] pb-1 pt-4"
                     >
                         <div class="px-4">
                             <div
-                                class="text-base font-medium text-gray-800 dark:text-gray-200"
+                                class="text-base font-medium text-[var(--color-content)]"
                             >
                                 {{ $page.props.auth.user?.name }}
                             </div>
-                            <div class="text-sm font-medium text-gray-500">
+                            <div class="text-sm font-medium text-[var(--color-content-muted)]">
                                 {{ $page.props.auth.user?.email }}
                             </div>
                         </div>
 
                         <div class="mt-3 space-y-1">
                             <ResponsiveNavLink :href="route('profile.edit')">
-                                Profile
+                                Profil
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 :href="route('logout')"
                                 method="post"
                                 as="button"
                             >
-                                Log Out
+                                Déconnexion
                             </ResponsiveNavLink>
                         </div>
                     </div>
                 </div>
             </nav>
 
-            <!-- Page Heading -->
             <header
-                class="bg-white shadow dark:bg-gray-800"
+                class="bg-[var(--color-surface)] shadow"
                 v-if="$slots.header"
             >
                 <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -189,8 +228,24 @@ const showingNavigationDropdown = ref(false);
                 </div>
             </header>
 
-            <!-- Page Content -->
             <main>
+                <div
+                    v-if="$page.props.flash?.status || $page.props.flash?.error"
+                    class="mx-auto mt-6 max-w-7xl px-4 sm:px-6 lg:px-8"
+                >
+                    <div
+                        v-if="$page.props.flash?.status"
+                        class="rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800"
+                    >
+                        {{ $page.props.flash.status }}
+                    </div>
+                    <div
+                        v-if="$page.props.flash?.error"
+                        class="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+                    >
+                        {{ $page.props.flash.error }}
+                    </div>
+                </div>
                 <slot />
             </main>
         </div>

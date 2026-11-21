@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<{
 <template>
     <hr
         :class="classNames(
-            'border-t border-[var(--color-ccm-gray-200)]',
+            'border-t border-[var(--color-border)]',
             $props.class,
         )"
     >

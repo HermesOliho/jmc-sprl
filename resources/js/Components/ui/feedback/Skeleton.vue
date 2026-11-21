@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<{
 <template>
     <div
         :class="classNames(
-            'animate-pulse bg-[var(--color-ccm-gray-200)]',
+            'animate-pulse bg-[var(--color-border)]',
             variant === 'circular' && 'rounded-full',
             variant === 'rectangular' && 'rounded-lg',
             variant === 'text' && 'h-4 w-full rounded',

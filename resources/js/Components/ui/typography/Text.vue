@@ -28,7 +28,7 @@ const sizeClass = computed(() => {
 <template>
     <component
         :is="as"
-        :class="classNames('text-[var(--color-ccm-gray-600)]', sizeClass, $props.class)"
+        :class="classNames('text-[var(--color-content-muted)]', sizeClass, $props.class)"
     >
         <slot />
     </component>

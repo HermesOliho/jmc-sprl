@@ -2,6 +2,8 @@
 import { Link } from '@inertiajs/vue3'
 import Container from '@/Components/ui/Container.vue'
 import PrimaryButton from '@/Components/ui/buttons/PrimaryButton.vue'
+import BrandLogo from '@/Components/common/BrandLogo.vue'
+import SeoHead from '@/Components/common/SeoHead.vue'
 
 defineProps<{
     status?: number
@@ -30,15 +32,22 @@ const errorMessages: Record<number, { title: string; description: string }> = {
 </script>
 
 <template>
-    <div class="flex min-h-screen flex-col items-center justify-center bg-[var(--color-ccm-gray-50)] p-4">
+    <div class="flex min-h-screen flex-col items-center justify-center bg-[var(--color-surface-muted)] p-4">
+        <SeoHead
+            :title="errorMessages[status || 404]?.title"
+            :description="errorMessages[status || 404]?.description"
+        />
         <Container class="text-center">
-            <p class="text-8xl font-bold text-[var(--color-ccm-blue)] md:text-9xl">
+            <Link href="/" class="mb-8 inline-flex justify-center" aria-label="Retour à l'accueil">
+                <BrandLogo context="auth" />
+            </Link>
+            <p class="text-8xl font-bold text-[var(--color-link)] md:text-9xl">
                 {{ status || 404 }}
             </p>
-            <h1 class="mt-4 text-3xl font-bold text-[var(--color-ccm-gray-900)] md:text-4xl">
+            <h1 class="mt-4 text-3xl font-bold text-[var(--color-content)] md:text-4xl">
                 {{ title || errorMessages[status || 404]?.title || 'Erreur' }}
             </h1>
-            <p class="mx-auto mt-4 max-w-md text-lg text-[var(--color-ccm-gray-600)]">
+            <p class="mx-auto mt-4 max-w-md text-lg text-[var(--color-content-muted)]">
                 {{ description || errorMessages[status || 404]?.description || 'Une erreur est survenue.' }}
             </p>
             <div class="mt-8">

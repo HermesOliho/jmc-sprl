@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<{
 <template>
     <span
         :class="classNames(
-            'inline-flex items-center rounded-md bg-[var(--color-ccm-gray-100)] px-2.5 py-1 text-sm font-medium text-[var(--color-ccm-gray-700)]',
+            'inline-flex items-center rounded-md bg-[var(--color-surface-elevated)] px-2.5 py-1 text-sm font-medium text-[var(--color-content)]',
             $props.class,
         )"
     >
