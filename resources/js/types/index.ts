@@ -86,6 +86,9 @@ export interface ServiceItem {
     title: string
     description: string
     icon: string
+    image?: string | null
+    image_alt?: string | null
+    image_position?: string | null
 }
 
 export interface StatsData {
@@ -212,7 +215,9 @@ export interface HistoryItem {
 
 export interface ServiceDetail extends ServiceItem {
     slug: string
-    image?: string
+    image?: string | null
+    image_alt?: string | null
+    image_position?: string | null
     deliverables: string[]
     benefits: string[]
 }

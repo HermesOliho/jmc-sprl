@@ -12,7 +12,19 @@ defineProps<{
 
 <template>
     <div class="group flex h-full flex-col overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm transition-all duration-200 hover:shadow-md">
-        <ServiceIllustration :icon="service.icon" />
+        <div v-if="service.image" class="aspect-[16/9] w-full overflow-hidden bg-[var(--color-surface-muted)]">
+            <img
+                :src="service.image"
+                :alt="service.image_alt || service.title"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                :style="service.image_position ? { objectPosition: service.image_position } : undefined"
+                width="1200"
+                height="675"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <ServiceIllustration v-else :icon="service.icon" />
         <div class="flex items-center gap-4 border-b border-[var(--color-border)] bg-[var(--color-surface-muted)] p-6">
             <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[var(--color-action)] text-white">
                 <Icon :name="service.icon" :size="26" />

@@ -10,8 +10,13 @@ import CtaSection from '@/Components/sections/CtaSection.vue'
 import FAQAccordion from '@/Components/sections/FAQAccordion.vue'
 import Stagger from '@/Components/animations/Stagger.vue'
 import Icon from '@/Components/ui/icons/Icon.vue'
-import { ALL_SERVICES, SERVICES_HERO, SERVICES_PROCESS, SERVICES_FAQ } from '@/config/services'
+import { SERVICES_HERO, SERVICES_PROCESS, SERVICES_FAQ } from '@/config/services'
 import { CTA_SECTION } from '@/config/home'
+import type { ServiceDetail } from '@/types'
+
+defineProps<{
+    services: ServiceDetail[]
+}>()
 
 const differentiators = [
     { icon: 'search', title: 'Écoute du besoin', desc: 'Une compréhension claire de votre demande avant toute proposition.' },
@@ -37,10 +42,10 @@ const differentiators = [
         <Section background="gray" id="liste">
             <SectionTitle subtitle="Notre expertise à votre service" />
 
-            <Stagger :stagger="0.06" :delay="0.1">
+            <Stagger v-if="services.length > 0" :stagger="0.06" :delay="0.1">
                 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     <div
-                        v-for="service in ALL_SERVICES"
+                        v-for="service in services"
                         :id="service.slug"
                         :key="service.slug"
                         class="scroll-mt-28"
@@ -49,6 +54,10 @@ const differentiators = [
                     </div>
                 </div>
             </Stagger>
+
+            <p v-else class="mx-auto max-w-2xl text-center text-[var(--color-content-muted)]">
+                Les services seront publiés prochainement. Utilisez le formulaire de contact pour nous présenter votre besoin.
+            </p>
         </Section>
 
         <Section background="white">

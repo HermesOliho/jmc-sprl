@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3'
+import { Link, usePage } from '@inertiajs/vue3'
+import { computed } from 'vue'
 import { useSite } from '@/composables'
-import { FOOTER_QUICK_LINKS, FOOTER_SERVICES, FOOTER_LEGAL_LINKS } from '@/config/navigation'
+import { FOOTER_QUICK_LINKS, FOOTER_LEGAL_LINKS } from '@/config/navigation'
 import Container from '@/Components/ui/Container.vue'
 import Icon from '@/Components/ui/icons/Icon.vue'
 import BrandLogo from '@/Components/common/BrandLogo.vue'
 import { formatAddress } from '@/utils'
 
 const site = useSite()
+const page = usePage()
+
+const footerServices = computed<Array<{ slug: string; title: string }>>(
+    () => (page.props.footer_services as Array<{ slug: string; title: string }> | undefined) ?? [],
+)
 
 function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -54,13 +60,13 @@ function scrollToTop() {
                     <h2 class="mb-4 text-sm font-semibold uppercase tracking-wider text-white/80">
                         Services
                     </h2>
-                    <ul class="space-y-3">
-                        <li v-for="service in FOOTER_SERVICES" :key="service.href">
+                    <ul v-if="footerServices.length > 0" class="space-y-3">
+                        <li v-for="service in footerServices" :key="service.slug">
                             <Link
-                                :href="service.href"
+                                :href="`/services#${service.slug}`"
                                 class="text-sm text-white/70 transition-colors hover:text-[var(--color-brand-orange-light)]"
                             >
-                                {{ service.label }}
+                                {{ service.title }}
                             </Link>
                         </li>
                     </ul>

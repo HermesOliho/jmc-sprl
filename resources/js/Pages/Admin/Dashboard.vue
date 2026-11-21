@@ -9,6 +9,8 @@ defineProps<{
         active_partners: number;
         team_members: number;
         active_team_members: number;
+        services: number;
+        active_services: number;
     };
 }>();
 </script>
@@ -46,6 +48,13 @@ defineProps<{
                             <span class="text-base font-normal text-[var(--color-content-muted)]">/ {{ stats.team_members }}</span>
                         </div>
                     </div>
+                    <div class="overflow-hidden bg-[var(--color-surface)] p-6 shadow-sm sm:rounded-lg">
+                        <div class="text-sm text-[var(--color-content-muted)]">Services actifs</div>
+                        <div class="mt-2 text-3xl font-semibold text-[var(--color-content)]">
+                            {{ stats.active_services }}
+                            <span class="text-base font-normal text-[var(--color-content-muted)]">/ {{ stats.services }}</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -80,6 +89,17 @@ defineProps<{
                         </h3>
                         <p class="mt-2 text-sm text-[var(--color-content-muted)]">
                             Gérer les profils des membres affichés sur la page À propos.
+                        </p>
+                    </Link>
+                    <Link
+                        :href="route('admin.services.index')"
+                        class="block overflow-hidden bg-[var(--color-surface)] p-6 shadow-sm transition hover:shadow-md sm:rounded-lg"
+                    >
+                        <h3 class="text-lg font-medium text-[var(--color-content)]">
+                            Gestion des services
+                        </h3>
+                        <p class="mt-2 text-sm text-[var(--color-content-muted)]">
+                            Gérer les services affichés sur l’accueil et la page Services.
                         </p>
                     </Link>
                 </div>

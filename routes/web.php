@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\PartnerController as AdminPartnerController;
+use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\TeamMemberController as AdminTeamMemberController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Partner;
+use App\Models\Service;
 use App\Models\TeamMember;
+use App\Support\ServiceData;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Sitemap\Sitemap;
@@ -27,9 +30,17 @@ Route::get('/', function () {
         ->filter(fn (array $partner): bool => filled($partner['logo']))
         ->values();
 
+    $services = Service::query()
+        ->active()
+        ->featured()
+        ->homeOrdered()
+        ->with('media')
+        ->get();
+
     return Inertia::render('Public/Home', [
         'seo' => config('site.pages.home'),
         'partners' => $partners,
+        'services' => ServiceData::collection($services),
     ]);
 })->name('home');
 
@@ -56,14 +67,30 @@ Route::get('/a-propos', function () {
 })->name('about');
 
 Route::get('/services', function () {
+    $services = Service::query()
+        ->active()
+        ->ordered()
+        ->with('media')
+        ->get();
+
     return Inertia::render('Public/Services', [
         'seo' => config('site.pages.services'),
+        'services' => ServiceData::collection($services),
     ]);
 })->name('services');
 
 Route::get('/contact', function () {
+    $services = Service::query()
+        ->active()
+        ->ordered()
+        ->get(['slug', 'title']);
+
     return Inertia::render('Public/Contact', [
         'seo' => config('site.pages.contact'),
+        'services' => $services->map(fn (Service $service): array => [
+            'slug' => $service->slug,
+            'title' => $service->title,
+        ])->values()->all(),
     ]);
 })->name('contact');
 
@@ -100,7 +127,7 @@ Route::redirect('/actualites', '/a-propos', 301);
 
 Route::get('/services/{slug}', function (string $slug) {
     return redirect('/services#'.$slug, 301);
-})->where('slug', '[a-z0-9-]+');
+})->where('slug', '[a-z0-9-]+')->name('services.redirect');
 
 Route::get('/sitemap.xml', function () {
     $sitemap = Sitemap::create();
@@ -127,6 +154,7 @@ Route::middleware(['auth', 'verified', 'can:access-admin'])->group(function () {
         Route::resource('users', AdminUserController::class)->except(['show']);
         Route::resource('partners', AdminPartnerController::class)->except(['show']);
         Route::resource('team-members', AdminTeamMemberController::class)->except(['show']);
+        Route::resource('services', AdminServiceController::class)->except(['show']);
     });
 });
 

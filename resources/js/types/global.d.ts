@@ -51,6 +51,7 @@ declare module '@inertiajs/core' {
                 status: string | null
                 error: string | null
             }
+            footer_services: Array<{ slug: string; title: string }>
         }
     }
 }

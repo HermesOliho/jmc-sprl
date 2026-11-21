@@ -9,15 +9,16 @@ import ProcessSection from '@/Components/sections/ProcessSection.vue'
 import PartnersCarousel from '@/Components/sections/PartnersCarousel.vue'
 import CtaSection from '@/Components/sections/CtaSection.vue'
 import { HOME_HERO, ABOUT_PREVIEW, FEATURES, PROCESS, CTA_SECTION } from '@/config/home'
-import { HOME_SERVICES } from '@/config/services'
-import type { Partner } from '@/types'
+import type { Partner, ServiceDetail } from '@/types'
 
 withDefaults(
     defineProps<{
         partners?: Partner[]
+        services?: ServiceDetail[]
     }>(),
     {
         partners: () => [],
+        services: () => [],
     },
 )
 </script>
@@ -36,7 +37,7 @@ withDefaults(
 
         <AboutPreviewSection :data="ABOUT_PREVIEW" />
 
-        <ServicesPreviewSection :services="HOME_SERVICES" />
+        <ServicesPreviewSection :services="services" />
 
         <FeaturesSection :features="FEATURES" />
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
@@ -54,6 +56,23 @@ class HandleInertiaRequests extends Middleware
                 'social' => config('site.social'),
                 'contact_subjects' => config('site.contact_subjects'),
             ],
+            'footer_services' => function () {
+                if (! Schema::hasTable('services')) {
+                    return [];
+                }
+
+                return Service::query()
+                    ->active()
+                    ->ordered()
+                    ->limit(4)
+                    ->get(['slug', 'title'])
+                    ->map(fn (Service $service): array => [
+                        'slug' => $service->slug,
+                        'title' => $service->title,
+                    ])
+                    ->values()
+                    ->all();
+            },
             'flash' => [
                 'status' => fn () => $request->session()->get('status'),
                 'error' => fn () => $request->session()->get('error'),

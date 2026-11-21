@@ -18,6 +18,15 @@ import { CONTACT_FAQ } from '@/config/faq'
 import { CTA_SECTION } from '@/config/home'
 
 const site = useSite()
+
+withDefaults(
+    defineProps<{
+        services?: Array<{ slug: string; title: string }>
+    }>(),
+    {
+        services: () => [],
+    },
+)
 </script>
 
 <template>
@@ -72,7 +81,7 @@ const site = useSite()
                         <SectionTitle :as="2" align="left" subtitle="Par formulaire">
                             Envoyez-nous un message
                         </SectionTitle>
-                        <ContactForm />
+                        <ContactForm :services="services" />
                         <p class="mt-4 text-sm text-[var(--color-content-muted)]">
                             En envoyant ce formulaire, vous acceptez que vos données soient utilisées pour répondre à votre demande.
                             Consultez notre

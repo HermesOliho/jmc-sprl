@@ -19,14 +19,17 @@ defineProps<{
             Nos domaines d'expertise
         </SectionTitle>
 
-        <Stagger :stagger="0.08" :delay="0.1">
+        <Stagger v-if="services.length > 0" :stagger="0.08" :delay="0.1">
             <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 <FeatureCard
                     v-for="service in services"
-                    :key="service.title"
+                    :key="service.slug ?? service.title"
                     :icon="service.icon"
                     :title="service.title"
                     :description="service.description"
+                    :image="service.image"
+                    :image-alt="service.image_alt"
+                    :image-position="service.image_position"
                 >
                     <div class="mt-4">
                         <Link
@@ -40,6 +43,10 @@ defineProps<{
                 </FeatureCard>
             </div>
         </Stagger>
+
+        <p v-else class="mx-auto max-w-2xl text-center text-[var(--color-content-muted)]">
+            Les services seront publiés prochainement.
+        </p>
 
         <div class="mt-12 text-center">
             <Link href="/services">

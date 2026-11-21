@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Partner;
+use App\Models\Service;
 use App\Models\TeamMember;
 use App\Models\User;
 use Inertia\Inertia;
@@ -20,6 +21,8 @@ class DashboardController extends Controller
                 'active_partners' => Partner::query()->active()->count(),
                 'team_members' => TeamMember::query()->count(),
                 'active_team_members' => TeamMember::query()->active()->count(),
+                'services' => Service::query()->count(),
+                'active_services' => Service::query()->active()->count(),
             ],
         ]);
     }

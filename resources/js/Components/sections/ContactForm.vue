@@ -6,7 +6,15 @@ import TextArea from '@/Components/ui/inputs/TextArea.vue'
 import PrimaryButton from '@/Components/ui/buttons/PrimaryButton.vue'
 import Icon from '@/Components/ui/icons/Icon.vue'
 import { useSite } from '@/composables'
-import { ALL_SERVICES } from '@/config/services'
+
+const props = withDefaults(
+    defineProps<{
+        services?: Array<{ slug: string; title: string }>
+    }>(),
+    {
+        services: () => [],
+    },
+)
 
 const site = useSite()
 const page = usePage()
@@ -39,7 +47,7 @@ onMounted(() => {
     }
 
     if (service) {
-        const selected = ALL_SERVICES.find((item) => item.slug === service)
+        const selected = props.services.find((item) => item.slug === service)
 
         if (selected && !form.message) {
             form.subject = form.subject || 'devis'
