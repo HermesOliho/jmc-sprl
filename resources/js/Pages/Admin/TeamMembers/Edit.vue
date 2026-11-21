@@ -8,6 +8,18 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
+const socialNetworks = [
+    'LinkedIn',
+    'X (Twitter)',
+    'Facebook',
+    'Instagram',
+    'YouTube',
+    'TikTok',
+    'GitHub',
+    'WhatsApp',
+    'Telegram',
+];
+
 const props = defineProps<{
     member: {
         id: number;
@@ -121,12 +133,25 @@ const submit = () => {
                                     class="grid gap-3 rounded-md border border-[var(--color-border)] p-3 sm:grid-cols-[1fr_2fr_auto]"
                                 >
                                     <div>
-                                        <TextInput
+                                        <select
                                             v-model="link.name"
-                                            type="text"
-                                            class="block w-full"
-                                            placeholder="Nom (ex: LinkedIn)"
-                                        />
+                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
+                                        >
+                                            <option value="" disabled>Sélectionner un réseau</option>
+                                            <option
+                                                v-for="network in socialNetworks"
+                                                :key="network"
+                                                :value="network"
+                                            >
+                                                {{ network }}
+                                            </option>
+                                            <option
+                                                v-if="link.name && !socialNetworks.includes(link.name)"
+                                                :value="link.name"
+                                            >
+                                                {{ link.name }}
+                                            </option>
+                                        </select>
                                         <InputError class="mt-1" :message="form.errors[`social_links.${index}.name`]" />
                                     </div>
                                     <div>
