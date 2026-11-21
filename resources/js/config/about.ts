@@ -1,144 +1,98 @@
 import type { HistoryItem, CompanyValue, MissionVision } from '@/types'
 
 export const ABOUT_HERO = {
-    title: 'À propos de CCM SARL',
+    title: 'À propos de JMC Services S.P.R.L',
     subtitle:
-        'Découvrez l\'histoire, les valeurs et la vision d\'une entreprise congolaise engagée dans l\'excellence du BTP depuis plus de 15 ans.',
-    image: 'https://placehold.co/1920x800/1a3a5c/ffffff?text=%C3%80+propos+de+CCM+SARL',
+        'Une entreprise de services engagée dans la construction, les infrastructures et l’accompagnement de projets en République Démocratique du Congo.',
 }
 
 export const ABOUT_PRESENTATION = {
-    title: 'Une référence congolaise dans le BTP',
-    content: `Congo Construction & Métallique SARL (CCM SARL) est une entreprise congolaise spécialisée dans la construction générale, la construction métallique, les travaux publics, l'électricité bâtiment et la consultance technique.
+    title: 'Une entreprise de services engagée',
+    content: `JMC Services S.P.R.L est une entreprise de services implantée à Durba, dans la province du Haut-Uélé, en République Démocratique du Congo. Elle intervient dans les domaines de la construction, des infrastructures et des services associés.
 
-Fondée il y a plus de 15 ans, CCM SARL s'est imposée comme un acteur incontournable du secteur du BTP en République Démocratique du Congo. Notre expertise couvre l'ensemble de la chaîne de valeur de la construction, de la conception à la livraison des projets.
+Notre organisation s’appuie sur l’écoute du besoin, la planification et la coordination des intervenants. Nous attachons une importance particulière à la qualité d’exécution et au respect des engagements convenus avec nos clients.
 
-Nous intervenons sur des projets d'envergure nationale : bâtiments publics et privés, infrastructures routières, construction métallique, réseaux électriques et adduction d'eau potable. Chaque projet est pour nous l'opportunité de démontrer notre savoir-faire et notre engagement.`,
+Cette page présente notre approche et les principes qui guident notre travail au quotidien.`,
 }
 
-export const ABOUT_HISTORY: HistoryItem[] = [
-    {
-        year: '2009',
-        title: 'Création de CCM SARL',
-        description:
-            'Fondation de l\'entreprise par des ingénieurs congolais passionnés, avec une vision claire : bâtir un Congo moderne avec des standards internationaux.',
-        icon: 'star',
-    },
-    {
-        year: '2012',
-        title: 'Premiers grands projets',
-        description:
-            'Réalisation des premières infrastructures publiques et privées, marquant l\'entrée de CCM SARL sur le marché national du BTP.',
-        icon: 'building2',
-    },
-    {
-        year: '2015',
-        title: 'Expansion régionale',
-        description:
-            'Extension des activités à plusieurs provinces de la RDC, avec l\'ouverture de nouveaux chantiers et le recrutement d\'équipes locales.',
-        icon: 'globe',
-    },
-    {
-        year: '2018',
-        title: 'Diversification des services',
-        description:
-            'Lancement de nouvelles divisions : électricité bâtiment, production de matériaux et consultance technique pour offrir une gamme complète.',
-        icon: 'zap',
-    },
-    {
-        year: '2021',
-        title: 'Certifications et reconnaissance',
-        description:
-            'Obtention de certifications qualité et sécurité. CCM SARL devient un partenaire privilégié des donneurs d\'ordre publics et privés.',
-        icon: 'award',
-    },
-    {
-        year: '2024',
-        title: 'CCM SARL aujourd\'hui',
-        description:
-            'Plus de 150 projets réalisés, 200 collaborateurs, et une présence active dans tout le pays. CCM SARL continue d\'innover pour un développement durable.',
-        icon: 'trending-up',
-    },
-]
+export const ABOUT_HISTORY: HistoryItem[] = []
 
 export const ABOUT_VALUES: CompanyValue[] = [
     {
         title: 'Qualité',
         description:
-            'Nous sélectionnons rigoureusement nos matériaux et contrôlons chaque étape de réalisation pour garantir des finitions irréprochables.',
+            'Nous portons une attention particulière à la préparation, à l’exécution et aux finitions de chaque projet.',
         icon: 'star',
-    },
-    {
-        title: 'Innovation',
-        description:
-            'Nous adoptons les techniques et technologies les plus récentes pour optimiser nos processus et offrir des solutions modernes.',
-        icon: 'trending-up',
     },
     {
         title: 'Sécurité',
         description:
-            'La sécurité de nos équipes et de nos chantiers est une priorité absolue. Nous appliquons des normes strictes et formons continuellement notre personnel.',
+            'La sécurité des équipes et des intervenants est intégrée dès la préparation du projet.',
         icon: 'shield-check',
     },
     {
         title: 'Professionnalisme',
         description:
-            'Rigueur, transparence et respect des engagements sont les piliers de notre relation avec nos clients et partenaires.',
+            'Rigueur, transparence et respect des engagements guident notre relation avec les clients et partenaires.',
         icon: 'briefcase',
     },
     {
         title: 'Engagement',
         description:
-            'Nous nous engageons pleinement dans chaque projet, avec une implication totale pour atteindre les objectifs fixés, quels que soient les défis.',
+            'Nous nous impliquons dans chaque projet avec une volonté de suivi et de continuité.',
         icon: 'heart',
     },
     {
         title: 'Respect',
         description:
-            'Respect des délais, des normes environnementales, des communautés locales et de chaque collaborateur. C\'est la base de notre éthique.',
+            'Nous tenons compte des délais, de l’environnement du projet et des personnes concernées.',
         icon: 'users',
+    },
+    {
+        title: 'Amélioration continue',
+        description:
+            'Nous tirons les enseignements de chaque expérience pour améliorer nos pratiques.',
+        icon: 'trending-up',
     },
 ]
 
 export const ABOUT_MISSION: MissionVision = {
-    title: 'Notre mission',
+    title: 'Notre engagement',
     description:
-        'Notre mission est de contribuer au développement des infrastructures de la République Démocratique du Congo en offrant des services de construction et de métallurgie de la plus haute qualité. Nous nous engageons à réaliser chaque projet avec intégrité, dans le respect des normes internationales, des délais convenus et des budgets établis.',
-    image: 'https://placehold.co/800x600/1a3a5c/ffffff?text=Notre+Mission',
-    callout: 'Contribuer au développement durable des infrastructures congolaises avec excellence et intégrité.',
+        'Mettre l’écoute du besoin, la qualité d’exécution et le respect des engagements au cœur de chaque projet, en adaptant notre organisation aux réalités du terrain.',
+    callout: 'Construire une relation de confiance durable avec nos clients et partenaires.',
 }
 
 export const ABOUT_VISION: MissionVision = {
-    title: 'Notre vision',
+    title: 'Notre approche',
     description:
-        'Devenir l\'entreprise de référence du secteur de la construction en RDC et en Afrique centrale, reconnue pour son expertise technique, la qualité de ses réalisations et son engagement envers le développement durable. Nous aspirons à être le partenaire privilégié des grands projets d\'infrastructure du pays.',
-    image: 'https://placehold.co/800x600/d4a843/1a3a5c?text=Notre+Vision',
-    callout: 'Devenir la référence congolaise de la construction en Afrique centrale.',
+        'Travailler de manière structurée, en clarifiant les étapes, les responsabilités et les modalités de suivi avant le démarrage des travaux.',
+    callout: 'Une organisation lisible, des échanges réguliers et des décisions documentées.',
 }
 
 export const ABOUT_WHY_US = {
     title: 'Pourquoi nous choisir ?',
-    subtitle: 'Des décennies d\'expertise au service de vos projets.',
+    subtitle: 'Une approche structurée, au plus près de votre projet.',
     features: [
         {
-            title: 'Expertise locale et internationale',
-            description: 'Une connaissance approfondie du terrain congolais combinée aux standards internationaux.',
-            icon: 'globe',
+            title: 'Écoute et compréhension du besoin',
+            description: 'Nous prenons le temps de cadrer votre demande avant de proposer une solution.',
+            icon: 'search',
         },
         {
-            title: 'Équipe hautement qualifiée',
-            description: 'Ingénieurs, techniciens et ouvriers formés aux dernières techniques de construction.',
-            icon: 'users',
+            title: 'Organisation du projet',
+            description: 'Les étapes, les responsabilités et les modalités de suivi sont clarifiées.',
+            icon: 'calendar',
         },
         {
-            title: 'Respect des délais',
-            description: 'Une gestion de projet rigoureuse qui garantit la livraison dans les temps impartis.',
-            icon: 'clock',
+            title: 'Qualité et sécurité',
+            description: 'Ces exigences sont intégrées à la préparation et à l’exécution des travaux.',
+            icon: 'shield-check',
         },
         {
-            title: 'Approche personnalisée',
-            description: 'Chaque projet est unique. Nous adaptons notre approche à vos besoins spécifiques.',
-            icon: 'heart',
+            title: 'Communication',
+            description: 'Un interlocuteur identifié et des échanges réguliers tout au long du projet.',
+            icon: 'message-circle',
         },
     ],
 }

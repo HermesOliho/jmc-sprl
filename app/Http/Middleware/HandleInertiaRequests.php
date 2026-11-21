@@ -34,6 +34,29 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+                'can' => [
+                    'accessAdmin' => $request->user()?->can('access-admin') ?? false,
+                ],
+            ],
+            'site' => fn () => [
+                'name' => config('site.name'),
+                'short_name' => config('site.short_name'),
+                'legal_name' => config('site.legal_name'),
+                'tagline' => config('site.tagline'),
+                'slogan' => config('site.slogan'),
+                'description' => config('site.description'),
+                'url' => config('site.url'),
+                'locale' => config('site.locale'),
+                'logo' => config('site.logo'),
+                'logo_dark' => config('site.logo_dark'),
+                'og_image' => config('site.og_image'),
+                'contact' => config('site.contact'),
+                'social' => config('site.social'),
+                'contact_subjects' => config('site.contact_subjects'),
+            ],
+            'flash' => [
+                'status' => fn () => $request->session()->get('status'),
+                'error' => fn () => $request->session()->get('error'),
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),

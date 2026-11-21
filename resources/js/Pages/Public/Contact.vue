@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { Link } from '@inertiajs/vue3'
 import PublicLayout from '@/Layouts/PublicLayout.vue'
 import SeoHead from '@/Components/common/SeoHead.vue'
 import PageHeader from '@/Components/common/PageHeader.vue'
@@ -8,52 +8,21 @@ import SectionTitle from '@/Components/ui/typography/SectionTitle.vue'
 import CtaSection from '@/Components/sections/CtaSection.vue'
 import ContactCard from '@/Components/sections/ContactCard.vue'
 import ContactForm from '@/Components/sections/ContactForm.vue'
-import GoogleMapPlaceholder from '@/Components/sections/GoogleMapPlaceholder.vue'
 import FAQAccordion from '@/Components/sections/FAQAccordion.vue'
 import FadeIn from '@/Components/animations/FadeIn.vue'
 import Icon from '@/Components/ui/icons/Icon.vue'
-import { COMPANY } from '@/config/company'
+import { useSite } from '@/composables'
+import { formatAddress } from '@/utils'
 import { CONTACT_HERO, CONTACT_INFO } from '@/config/contact'
 import { CONTACT_FAQ } from '@/config/faq'
 import { CTA_SECTION } from '@/config/home'
-import { ROUTE_CONTACT } from '@/constants'
 
-const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ContactPage',
-    name: 'Contact – CCM SARL',
-    description: 'Contactez CCM SARL pour vos projets de construction et de métallurgie.',
-    url: ROUTE_CONTACT,
-    mainEntity: {
-        '@type': 'Organization',
-        name: COMPANY.legalName,
-        telephone: COMPANY.phone,
-        email: COMPANY.email,
-        address: {
-            '@type': 'PostalAddress',
-            streetAddress: COMPANY.address.street,
-            addressLocality: COMPANY.address.city,
-            addressRegion: COMPANY.address.province,
-            addressCountry: COMPANY.address.country,
-        },
-    },
-}
-
-onMounted(() => {
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.textContent = JSON.stringify(jsonLd)
-    document.head.appendChild(script)
-})
+const site = useSite()
 </script>
 
 <template>
     <PublicLayout>
-        <SeoHead
-            title="Contact"
-            description="Contactez CCM SARL pour vos projets de construction, métallurgie, électricité et travaux publics. Demandez un devis gratuit."
-            :canonical="ROUTE_CONTACT"
-        />
+        <SeoHead />
 
         <PageHeader
             :title="CONTACT_HERO.title"
@@ -65,17 +34,28 @@ onMounted(() => {
             <div class="grid gap-12 lg:grid-cols-5">
                 <div class="lg:col-span-2">
                     <FadeIn>
-                        <SectionTitle :as="3" align="left" subtitle="Nos coordonnées">
+                        <SectionTitle :as="2" align="left" subtitle="Nos coordonnées">
                             Entrons en contact
                         </SectionTitle>
                         <ContactCard />
 
-                        <div class="mt-8 flex items-center gap-3">
+                        <a
+                            v-if="site.contact.whatsapp"
+                            :href="site.contact.whatsapp.url"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="mt-6 inline-flex items-center gap-2 rounded-lg bg-[var(--color-action)] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-action-hover)]"
+                        >
+                            <Icon name="message-circle" :size="18" />
+                            Discuter sur WhatsApp
+                        </a>
+
+                        <div v-if="site.social.length > 0" class="mt-8 flex items-center gap-3">
                             <a
-                                v-for="s in COMPANY.social"
+                                v-for="s in site.social"
                                 :key="s.name"
                                 :href="s.url"
-                                class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-ccm-blue)] text-white transition-colors hover:bg-[var(--color-ccm-blue-light)]"
+                                class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-action)] text-white transition-colors hover:bg-[var(--color-action-hover)]"
                                 :aria-label="s.name"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -88,60 +68,51 @@ onMounted(() => {
 
                 <div class="lg:col-span-3">
                     <FadeIn :delay="0.1">
-                        <SectionTitle :as="3" align="left" subtitle="Par email">
+                        <SectionTitle :as="2" align="left" subtitle="Par formulaire">
                             Envoyez-nous un message
                         </SectionTitle>
                         <ContactForm />
+                        <p class="mt-4 text-sm text-[var(--color-content-muted)]">
+                            En envoyant ce formulaire, vous acceptez que vos données soient utilisées pour répondre à votre demande.
+                            Consultez notre
+                            <Link href="/politique-de-confidentialite" class="font-medium text-[var(--color-link)] underline-offset-2 hover:underline">
+                                politique de confidentialité
+                            </Link>.
+                        </p>
                     </FadeIn>
                 </div>
             </div>
         </Section>
 
         <Section background="gray">
-            <SectionTitle subtitle="Nous trouver">
-                Notre emplacement
-            </SectionTitle>
-            <GoogleMapPlaceholder />
-        </Section>
-
-        <Section background="white">
             <div class="mx-auto max-w-4xl">
                 <SectionTitle subtitle="Informations utiles">
                     Avant de nous contacter
                 </SectionTitle>
-                <div class="grid gap-6 sm:grid-cols-3">
-                    <div class="rounded-xl border border-[var(--color-ccm-gray-200)] bg-white p-6 text-center shadow-sm">
-                        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-ccm-blue)]/10">
-                            <Icon name="clock" :size="22" class="text-[var(--color-ccm-blue)]" />
+                <div class="grid gap-6 sm:grid-cols-2">
+                    <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 text-center shadow-sm">
+                        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-action)]/10">
+                            <Icon name="clock" :size="22" class="text-[var(--color-link)]" />
                         </div>
-                        <h3 class="font-semibold text-[var(--color-ccm-gray-900)]">Délai de réponse</h3>
-                        <p class="mt-2 text-sm text-[var(--color-ccm-gray-600)]">
+                        <h3 class="font-semibold text-[var(--color-content)]">Délai de réponse</h3>
+                        <p class="mt-2 text-sm text-[var(--color-content-muted)]">
                             {{ CONTACT_INFO.responseTime }}
                         </p>
                     </div>
-                    <div class="rounded-xl border border-[var(--color-ccm-gray-200)] bg-white p-6 text-center shadow-sm">
-                        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-ccm-blue)]/10">
-                            <Icon name="calendar" :size="22" class="text-[var(--color-ccm-blue)]" />
+                    <div class="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 text-center shadow-sm">
+                        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-action)]/10">
+                            <Icon name="map-pin" :size="22" class="text-[var(--color-link)]" />
                         </div>
-                        <h3 class="font-semibold text-[var(--color-ccm-gray-900)]">Disponibilité</h3>
-                        <p class="mt-2 text-sm text-[var(--color-ccm-gray-600)]">
-                            {{ COMPANY.hours }}
-                        </p>
-                    </div>
-                    <div class="rounded-xl border border-[var(--color-ccm-gray-200)] bg-white p-6 text-center shadow-sm">
-                        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-ccm-blue)]/10">
-                            <Icon name="phone" :size="22" class="text-[var(--color-ccm-blue)]" />
-                        </div>
-                        <h3 class="font-semibold text-[var(--color-ccm-gray-900)]">Urgence</h3>
-                        <p class="mt-2 text-sm text-[var(--color-ccm-gray-600)]">
-                            {{ CONTACT_INFO.emergency }}
+                        <h3 class="font-semibold text-[var(--color-content)]">Localisation</h3>
+                        <p class="mt-2 text-sm text-[var(--color-content-muted)]">
+                            {{ formatAddress(site.contact.address) }}
                         </p>
                     </div>
                 </div>
             </div>
         </Section>
 
-        <Section background="gray">
+        <Section background="white">
             <SectionTitle subtitle="Questions fréquentes">
                 FAQ – Contact
             </SectionTitle>

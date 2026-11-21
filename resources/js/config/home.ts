@@ -1,38 +1,33 @@
 import type { HomeHero, AboutPreview, Feature, TimelineItem } from '@/types'
 
 export const HOME_HERO: HomeHero = {
-    title: 'Construisons aujourd\'hui les infrastructures de demain',
+    title: 'Construire aujourd’hui les infrastructures de demain',
     subtitle:
-        'Expert en construction générale, métallique et génie civil, CCM SARL donne vie à vos projets avec rigueur, sécurité et excellence.',
-    badge: 'Entreprise congolaise',
-    stats: [
-        { label: 'Projets réalisés', value: '20+' },
-        { label: 'Années d\'expertise', value: '15+' },
-        { label: 'Professionnalisme', value: '100%' },
-    ],
+        'JMC Services S.P.R.L accompagne les porteurs de projets dans la construction, les infrastructures et les services associés, avec une attention constante portée à la qualité et au respect des engagements.',
+    badge: 'JMC Services S.P.R.L',
+    stats: [],
     primaryCta: { label: 'Découvrir nos services', href: '/services' },
-    secondaryCta: { label: 'Demander un devis', href: '/demande-devis' },
+    secondaryCta: { label: 'Demander un devis', href: '/contact?subject=devis' },
 }
 
 export const ABOUT_PREVIEW: AboutPreview = {
     title: 'Qui sommes-nous ?',
     content:
-        'Congo Construction & Métallique SARL est une entreprise congolaise de référence dans le secteur du BTP. Spécialisée en construction générale, métallique, électricité bâtiment et travaux publics, nous accompagnons nos clients de la conception à la livraison, avec un engagement constant pour la qualité et la satisfaction.',
-    image: 'https://placehold.co/800x600/1a3a5c/ffffff?text=CCM+SARL',
+        'JMC Services S.P.R.L est une entreprise de services implantée à Durba, dans la province du Haut-Uélé, en République Démocratique du Congo. Nous intervenons dans les domaines de la construction, des infrastructures et des services associés. Notre approche s’appuie sur l’écoute du besoin, la qualité d’exécution et le respect des engagements.',
     values: [
         {
             title: 'Qualité',
-            description: 'Des finitions soignées et des matériaux sélectionnés pour chaque projet.',
+            description: 'Une attention particulière portée aux finitions et à la cohérence de chaque réalisation.',
             icon: 'star',
         },
         {
-            title: 'Innovation',
-            description: 'Des solutions techniques modernes adaptées aux défis d\'aujourd\'hui.',
-            icon: 'trending-up',
+            title: 'Sécurité',
+            description: 'La sécurité des équipes et des intervenants est intégrée à la préparation de chaque projet.',
+            icon: 'shield-check',
         },
         {
             title: 'Engagement',
-            description: 'Une relation de confiance bâtie sur la transparence et le respect des délais.',
+            description: 'Une relation de travail fondée sur la transparence, l’écoute et le suivi.',
             icon: 'heart',
         },
     ],
@@ -41,34 +36,34 @@ export const ABOUT_PREVIEW: AboutPreview = {
 
 export const FEATURES: Feature[] = [
     {
-        title: 'Expertise reconnue',
-        description: 'Une équipe d\'ingénieurs et de techniciens qualifiés pour des réalisations d\'excellence.',
+        title: 'Écoute du besoin',
+        description: 'Chaque projet commence par une compréhension claire de vos attentes et de vos contraintes.',
+        icon: 'search',
+    },
+    {
+        title: 'Qualité d’exécution',
+        description: 'Une organisation rigoureuse et une attention portée aux détails à chaque étape.',
         icon: 'award',
     },
     {
-        title: 'Équipe qualifiée',
-        description: 'Des professionnels formés aux dernières techniques et normes de construction.',
-        icon: 'users',
-    },
-    {
         title: 'Respect des délais',
-        description: 'Une gestion de projet rigoureuse pour livrer dans les temps, sans compromis sur la qualité.',
+        description: 'Une planification réaliste et un suivi régulier pour tenir les engagements convenus.',
         icon: 'clock',
     },
     {
-        title: 'Sécurité avant tout',
-        description: 'Des chantiers organisés selon les normes de sécurité les plus strictes.',
+        title: 'Sécurité',
+        description: 'Des dispositions adaptées à la nature du projet et à son environnement.',
         icon: 'shield-check',
     },
     {
-        title: 'Accompagnement sur mesure',
-        description: 'Un suivi personnalisé à chaque étape, de l\'étude à la livraison finale.',
+        title: 'Accompagnement',
+        description: 'Un interlocuteur identifiable et une communication continue tout au long du projet.',
         icon: 'heart',
     },
     {
-        title: 'Matériel moderne',
-        description: 'Des équipements récents et performants pour une exécution précise et efficace.',
-        icon: 'cog',
+        title: 'Amélioration continue',
+        description: 'Une démarche d’apprentissage et d’ajustement au fil des projets.',
+        icon: 'trending-up',
     },
 ]
 
@@ -76,39 +71,39 @@ export const PROCESS: TimelineItem[] = [
     {
         step: 1,
         title: 'Analyse',
-        description: 'Rencontre et étude approfondie de vos besoins et contraintes.',
+        description: 'Rencontre et étude de vos besoins, contraintes et priorités.',
         icon: 'search',
     },
     {
         step: 2,
         title: 'Étude',
-        description: 'Conception technique et élaboration du cahier des charges détaillé.',
+        description: 'Conception technique et élaboration du cahier des charges.',
         icon: 'file-text',
     },
     {
         step: 3,
-        title: 'Conception',
-        description: 'Plans, schémas et maquettes pour valider chaque aspect du projet.',
-        icon: 'ruler',
+        title: 'Planification',
+        description: 'Organisation des étapes, des ressources et du calendrier.',
+        icon: 'calendar',
     },
     {
         step: 4,
         title: 'Réalisation',
-        description: 'Exécution chantier dans le respect des normes et du planning.',
+        description: 'Exécution des travaux selon le cahier des charges convenu.',
         icon: 'hard-hat',
     },
     {
         step: 5,
         title: 'Livraison',
-        description: 'Réception des travaux et accompagnement post-livraison.',
+        description: 'Réception des travaux et accompagnement après livraison.',
         icon: 'circle-check',
     },
 ]
 
 export const CTA_SECTION = {
-    title: 'Besoin d\'un partenaire fiable ?',
+    title: 'Parlons de votre projet',
     description:
-        'Confiez-nous vos projets de construction, rénovation ou infrastructure. Nous vous accompagnons de A à Z avec professionnalisme et dévouement.',
-    primaryButton: { label: 'Demander un devis', href: '/demande-devis' },
-    secondaryButton: { label: 'Téléphoner', href: 'tel:+243812345678' },
+        'Présentez-nous votre besoin : nous vous répondrons avec une première orientation et les informations utiles pour la suite.',
+    primaryButton: { label: 'Demander un devis', href: '/contact?subject=devis' },
+    secondaryButton: { label: 'Nous contacter', href: '/contact' },
 }

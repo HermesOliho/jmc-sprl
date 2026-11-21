@@ -1,4 +1,5 @@
 export { classNames } from './classNames'
+export { formatAddress } from './formatAddress'
 export { formatDate, formatDateShort, formatDateISO } from './formatDate'
 export { truncate } from './truncate'
 export { scrollToTop, scrollToElement } from './scrollTo'

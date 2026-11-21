@@ -2,39 +2,45 @@ import type { ServiceDetail, ServiceItem } from '@/types'
 
 export const HOME_SERVICES: ServiceItem[] = [
     {
-        title: 'Construction Générale',
+        slug: 'construction-generale',
+        title: 'Construction générale',
         description:
-            'Bâtiments résidentiels, commerciaux et industriels clés en main. De la fondation à la livraison, nous assurons chaque étape avec rigueur.',
+            'Bâtiments résidentiels, commerciaux et industriels : de la préparation du projet à la livraison.',
         icon: 'building2',
     },
     {
-        title: 'Construction Métallique',
+        slug: 'construction-metallique',
+        title: 'Construction métallique',
         description:
-            'Charpentes métalliques, sheds, hangars et structures sur mesure. Fabrication et montage selon les normes internationales.',
+            'Charpentes, sheds, hangars et structures métalliques, avec fabrication et montage.',
         icon: 'hard-hat',
     },
     {
-        title: 'Électricité Bâtiment',
+        slug: 'electricite-batiment',
+        title: 'Électricité bâtiment',
         description:
-            'Installations électriques complètes, tableaux de distribution, éclairage et systèmes de sécurité pour tous types de bâtiments.',
+            'Installations électriques, tableaux de distribution, éclairage et systèmes associés.',
         icon: 'zap',
     },
     {
-        title: 'Travaux Publics',
+        slug: 'travaux-publics',
+        title: 'Travaux publics',
         description:
-            'Voiries, réseaux divers, terrassement et aménagements urbains. Des infrastructures durables pour le développement.',
+            'Voiries, réseaux divers, terrassement et aménagements.',
         icon: 'landmark',
     },
     {
+        slug: 'renovation',
         title: 'Rénovation',
         description:
-            'Rénovation complète ou partielle de bâtiments existants. Mise aux normes, extension et amélioration du bâti.',
+            'Rénovation complète ou partielle de bâtiments existants, extension et amélioration du bâti.',
         icon: 'home',
     },
     {
+        slug: 'consultance',
         title: 'Consultance',
         description:
-            'Études techniques, audits, conseil en construction et assistance à la maîtrise d\'ouvrage pour vos projets.',
+            'Études techniques, audits et assistance à la maîtrise d’ouvrage.',
         icon: 'globe',
     },
 ]
@@ -42,18 +48,16 @@ export const HOME_SERVICES: ServiceItem[] = [
 export const SERVICES_HERO = {
     title: 'Nos services',
     subtitle:
-        'Une gamme complète de services de construction et de métallurgie pour répondre à tous vos besoins, de la conception à la réalisation.',
-    image: 'https://placehold.co/1920x800/1a3a5c/ffffff?text=Nos+Services',
+        'Une gamme de services couvrant la construction, les infrastructures et les prestations associées. Les modalités de chaque intervention sont précisées dans le devis.',
 }
 
 export const ALL_SERVICES: ServiceDetail[] = [
     {
         slug: 'construction-generale',
-        title: 'Construction Générale',
+        title: 'Construction générale',
         description:
-            'Réalisation de bâtiments résidentiels, commerciaux et industriels clés en main. Nous prenons en charge l\'intégralité de votre projet, de la fondation à la livraison finale.',
+            'Réalisation de bâtiments résidentiels, commerciaux et industriels. Nous prenons en charge la coordination du projet, de la préparation à la livraison.',
         icon: 'building2',
-        image: 'https://placehold.co/800x600/1a3a5c/ffffff?text=Construction+G%C3%A9n%C3%A9rale',
         deliverables: [
             'Bâtiments résidentiels et villas',
             'Immeubles commerciaux et bureaux',
@@ -62,19 +66,18 @@ export const ALL_SERVICES: ServiceDetail[] = [
             'Rénovation et extension de bâtiments',
         ],
         benefits: [
-            'Approche clé en main de A à Z',
-            'Respect strict des normes de construction',
-            'Suivi de chantier transparent',
-            'Garantie décennale incluse',
+            'Approche clé en main',
+            'Suivi du projet',
+            'Coordination des intervenants',
+            'Communication régulière',
         ],
     },
     {
         slug: 'construction-metallique',
-        title: 'Construction Métallique',
+        title: 'Construction métallique',
         description:
-            'Fabrication et montage de structures métalliques sur mesure. Notre atelier de métallurgie est équipé pour réaliser tous types d\'ouvrages métalliques.',
+            'Fabrication et montage de structures métalliques sur mesure : charpentes, sheds, hangars et ouvrages associés.',
         icon: 'hard-hat',
-        image: 'https://placehold.co/800x600/d4a843/1a3a5c?text=Construction+M%C3%A9tallique',
         deliverables: [
             'Charpentes métalliques pour bâtiments',
             'Sheds, hangars et structures industrielles',
@@ -83,40 +86,38 @@ export const ALL_SERVICES: ServiceDetail[] = [
             'Structures pour équipements sportifs',
         ],
         benefits: [
-            'Fabrication sur mesure en atelier',
-            'Montage rapide sur site',
-            'Structures durables et résistantes',
-            'Conformité aux normes internationales',
+            'Fabrication sur mesure',
+            'Montage sur site',
+            'Coordination avec les autres corps d’état',
+            'Contrôle des assemblages',
         ],
     },
     {
         slug: 'travaux-publics',
-        title: 'Travaux Publics',
+        title: 'Travaux publics',
         description:
-            'Expert en infrastructures publiques, nous réalisons des projets d\'envergure pour le compte de l\'État, des collectivités et du secteur privé.',
+            'Réalisation de voiries, réseaux divers, terrassements et aménagements pour les collectivités et le secteur privé.',
         icon: 'landmark',
-        image: 'https://placehold.co/800x600/1a3a5c/ffffff?text=Travaux+Publics',
         deliverables: [
             'Voiries et réseaux divers (VRD)',
             'Routes et pistes rurales',
             'Aménagements urbains',
             'Terrassement et nivellement',
-            'Réseaux d\'assainissement',
+            'Réseaux d’assainissement',
         ],
         benefits: [
-            'Maîtrise des grands chantiers',
-            'Respect des normes environnementales',
-            'Matériel de chantier moderne',
-            'Capacité d\'intervention nationale',
+            'Coordination des travaux',
+            'Prise en compte de l’environnement du site',
+            'Suivi des étapes',
+            'Communication avec le maître d’ouvrage',
         ],
     },
     {
         slug: 'electricite-batiment',
-        title: 'Électricité Bâtiment',
+        title: 'Électricité bâtiment',
         description:
-            'Installations électriques complètes pour tous types de bâtiments. Nous assurons la conception, la réalisation et la maintenance de vos réseaux électriques.',
+            'Installations électriques pour bâtiments : conception, réalisation et maintenance des réseaux.',
         icon: 'zap',
-        image: 'https://placehold.co/800x600/d4a843/1a3a5c?text=%C3%89lectricit%C3%A9+B%C3%A2timent',
         deliverables: [
             'Installations électriques intérieures',
             'Tableaux de distribution et comptage',
@@ -125,19 +126,18 @@ export const ALL_SERVICES: ServiceDetail[] = [
             'Mise aux normes et rénovation',
         ],
         benefits: [
-            'Installations conformes aux normes',
-            'Matériel certifié de qualité',
-            'Intervention rapide',
-            'Maintenance et SAV inclus',
+            'Installations adaptées au bâtiment',
+            'Coordination avec les autres lots',
+            'Suivi des essais',
+            'Maintenance et accompagnement',
         ],
     },
     {
         slug: 'production-de-materiaux',
-        title: 'Production de Matériaux',
+        title: 'Production de matériaux',
         description:
-            'Production et fourniture de matériaux de construction de haute qualité. Notre unité de production garantit la traçabilité et la conformité des matériaux utilisés.',
+            'Production et fourniture de matériaux de construction, avec suivi de la qualité et de la disponibilité.',
         icon: 'factory',
-        image: 'https://placehold.co/800x600/1a3a5c/ffffff?text=Production+Mat%C3%A9riaux',
         deliverables: [
             'Blocs de béton et agglomérés',
             'Fer à béton et armatures',
@@ -146,19 +146,18 @@ export const ALL_SERVICES: ServiceDetail[] = [
             'Éléments préfabriqués',
         ],
         benefits: [
-            'Qualité constante et contrôlée',
-            'Disponibilité immédiate',
-            'Prix compétitifs',
+            'Suivi de la qualité',
+            'Disponibilité des produits',
             'Livraison sur chantier',
+            'Conseil technique',
         ],
     },
     {
         slug: 'travaux-miniers',
-        title: 'Travaux Miniers',
+        title: 'Travaux miniers',
         description:
-            'Prestations de services pour le secteur minier : infrastructures de surface, génie civil minier et aménagements spécifiques.',
+            'Prestations pour le secteur minier : infrastructures de surface, génie civil et aménagements spécifiques.',
         icon: 'cog',
-        image: 'https://placehold.co/800x600/d4a843/1a3a5c?text=Travaux+Minier',
         deliverables: [
             'Infrastructures de surface',
             'Génie civil minier',
@@ -167,40 +166,38 @@ export const ALL_SERVICES: ServiceDetail[] = [
             'Bâtiments industriels miniers',
         ],
         benefits: [
-            'Expérience du secteur minier',
-            'Respect des normes de sécurité',
-            'Intervention en milieu difficile',
-            'Flexibilité d\'adaptation',
+            'Prise en compte des contraintes du site',
+            'Respect des procédures de sécurité',
+            'Coordination des intervenants',
+            'Adaptation au contexte',
         ],
     },
     {
         slug: 'adduction-eau-potable',
-        title: 'Adduction d\'Eau Potable',
+        title: 'Adduction d’eau potable',
         description:
-            'Installation de systèmes d\'adduction d\'eau potable pour les collectivités et les particuliers. Nous contribuons à l\'accès à l\'eau potable dans tout le pays.',
+            'Installation de systèmes d’adduction d’eau potable pour les collectivités et les particuliers.',
         icon: 'droplets',
-        image: 'https://placehold.co/800x600/1a3a5c/ffffff?text=Adduction+Eau',
         deliverables: [
-            'Réseaux de distribution d\'eau',
-            'Châteaux d\'eau et réservoirs',
+            'Réseaux de distribution d’eau',
+            'Châteaux d’eau et réservoirs',
             'Forages et pompages',
             'Systèmes de traitement',
             'Raccordements particuliers',
         ],
         benefits: [
-            'Solution complète clé en main',
-            'Matériaux aux normes OMS',
-            'Maintenance préventive incluse',
-            'Intervention rapide',
+            'Solution complète',
+            'Choix des matériaux',
+            'Maintenance préventive',
+            'Accompagnement technique',
         ],
     },
     {
         slug: 'soudure',
         title: 'Soudure',
         description:
-            'Prestations de soudure professionnelle pour tous types d\'ouvrages métalliques. Notre équipe de soudeurs certifiés réalise des assemblages de haute qualité.',
+            'Prestations de soudure pour ouvrages métalliques : assemblages, réparation et maintenance.',
         icon: 'hammer',
-        image: 'https://placehold.co/800x600/d4a843/1a3a5c?text=Soudure',
         deliverables: [
             'Soudure de charpentes et structures',
             'Assemblage de pièces métalliques',
@@ -209,30 +206,29 @@ export const ALL_SERVICES: ServiceDetail[] = [
             'Tuyauterie industrielle',
         ],
         benefits: [
-            'Soudeurs certifiés et expérimentés',
-            'Matériel de soudure moderne',
             'Travail en atelier et sur site',
-            'Contrôle qualité systématique',
+            'Contrôle des assemblages',
+            'Matériel adapté',
+            'Suivi des travaux',
         ],
     },
     {
         slug: 'consultance',
         title: 'Consultance',
         description:
-            'Services de conseil technique et d\'assistance à la maîtrise d\'ouvrage. Nous vous accompagnons dans la planification et la gestion de vos projets.',
+            'Services de conseil technique et d’assistance à la maîtrise d’ouvrage pour la planification et la gestion de projets.',
         icon: 'globe',
-        image: 'https://placehold.co/800x600/1a3a5c/ffffff?text=Consultance',
         deliverables: [
             'Études de faisabilité',
             'Audits techniques',
-            'Assistance à la maîtrise d\'ouvrage',
+            'Assistance à la maîtrise d’ouvrage',
             'Contrôle technique des constructions',
             'Expertises et diagnostics',
         ],
         benefits: [
-            'Expertise pluridisciplinaire',
-            'Rapports détaillés et exploitables',
-            'Indépendance et objectivité',
+            'Regard technique externe',
+            'Rapports exploitables',
+            'Approche indépendante',
             'Accompagnement personnalisé',
         ],
     },
@@ -240,9 +236,8 @@ export const ALL_SERVICES: ServiceDetail[] = [
         slug: 'peinture',
         title: 'Peinture',
         description:
-            'Travaux de peinture intérieure et extérieure pour tous types de bâtiments. Finitions soignées et durables pour un rendu esthétique professionnel.',
+            'Travaux de peinture intérieure et extérieure pour bâtiments, avec préparation des supports et finitions.',
         icon: 'paintbrush',
-        image: 'https://placehold.co/800x600/d4a843/1a3a5c?text=Peinture',
         deliverables: [
             'Peinture intérieure et extérieure',
             'Revêtements muraux décoratifs',
@@ -251,19 +246,18 @@ export const ALL_SERVICES: ServiceDetail[] = [
             'Marquage au sol et signalétique',
         ],
         benefits: [
-            'Finitions professionnelles',
-            'Peintures de qualité supérieure',
-            'Respect des délais',
-            'Propreté et soin du chantier',
+            'Finitions soignées',
+            'Préparation des supports',
+            'Respect du planning',
+            'Propreté du chantier',
         ],
     },
     {
         slug: 'commerce-de-pieces',
-        title: 'Commerce de Pièces',
+        title: 'Commerce de pièces',
         description:
-            'Distribution et vente de pièces détachées et d\'équipements pour le bâtiment et la construction métallique. Un stock important pour une disponibilité immédiate.',
+            'Distribution de pièces détachées et d’équipements pour le bâtiment et la construction métallique.',
         icon: 'shopping-cart',
-        image: 'https://placehold.co/800x600/1a3a5c/ffffff?text=Commerce+Pi%C3%A8ces',
         deliverables: [
             'Quincaillerie et ferronnerie',
             'Équipements de protection',
@@ -272,29 +266,28 @@ export const ALL_SERVICES: ServiceDetail[] = [
             'Accessoires de construction',
         ],
         benefits: [
-            'Large gamme de produits',
-            'Stock permanent et varié',
-            'Livraison rapide',
-            'Conseil technique inclus',
+            'Gamme de produits',
+            'Disponibilité',
+            'Livraison',
+            'Conseil technique',
         ],
     },
     {
         slug: 'agro-pastoral',
         title: 'Agro-pastoral',
         description:
-            'Développement de projets agro-pastoraux intégrés. Nous concevons et réalisons des infrastructures agricoles et d\'élevage modernes et durables.',
+            'Conception et réalisation d’infrastructures agricoles et d’élevage.',
         icon: 'sprout',
-        image: 'https://placehold.co/800x600/d4a843/1a3a5c?text=Agro-pastoral',
         deliverables: [
             'Infrastructures agricoles',
-            'Bâtiments d\'élevage',
-            'Systèmes d\'irrigation',
+            'Bâtiments d’élevage',
+            'Systèmes d’irrigation',
             'Stocks et entrepôts agricoles',
             'Aménagements fonciers',
         ],
         benefits: [
             'Approche intégrée',
-            'Respect de l\'environnement',
+            'Prise en compte de l’environnement',
             'Durabilité des installations',
             'Accompagnement technique',
         ],
@@ -305,54 +298,54 @@ export const SERVICES_PROCESS = [
     {
         step: 1,
         title: 'Prise de contact',
-        description: 'Vous nous exposez votre projet et vos besoins.',
+        description: 'Vous nous présentez votre projet et vos besoins.',
         icon: 'phone',
     },
     {
         step: 2,
         title: 'Étude et devis',
-        description: 'Nous analysons votre demande et vous fournissons un devis détaillé.',
+        description: 'Nous analysons votre demande et vous transmettons les éléments utiles.',
         icon: 'file-text',
     },
     {
         step: 3,
         title: 'Planification',
-        description: 'Établissement du planning et préparation du chantier.',
+        description: 'Les étapes, les responsabilités et le calendrier sont clarifiés.',
         icon: 'calendar',
     },
     {
         step: 4,
         title: 'Réalisation',
-        description: 'Exécution des travaux selon le cahier des charges.',
+        description: 'Exécution des travaux selon le cahier des charges convenu.',
         icon: 'hard-hat',
     },
     {
         step: 5,
         title: 'Livraison',
-        description: 'Réception du chantier et suivi post-livraison.',
+        description: 'Réception des travaux et accompagnement après livraison.',
         icon: 'circle-check',
     },
 ]
 
 export const SERVICES_FAQ = [
     {
-        question: 'Comment obtenir un devis ?',
-        answer: 'Vous pouvez nous contacter via notre formulaire en ligne, par téléphone ou par email. Nous vous répondrons sous 48h avec un devis détaillé et personnalisé.',
+        question: 'Comment demander un devis ?',
+        answer: 'Utilisez le formulaire de contact en choisissant le sujet « Demande de devis ». Précisez votre besoin, la localisation et, si possible, les éléments techniques disponibles.',
     },
     {
-        question: 'Quels sont vos délais d\'intervention ?',
-        answer: 'Les délais varient selon la nature et l\'ampleur du projet. Nous établissons un planning précis avant le début des travaux et nous nous engageons à le respecter.',
+        question: 'Quelles informations fournir ?',
+        answer: 'La nature du projet, le lieu, les dimensions ou surfaces concernées, le calendrier souhaité et les documents techniques éventuels.',
     },
     {
-        question: 'Proposez-vous une garantie sur vos travaux ?',
-        answer: 'Oui, tous nos travaux sont couverts par une garantie décennale et une assurance responsabilité civile professionnelle.',
+        question: 'Comment se déroule le suivi ?',
+        answer: 'Les modalités de suivi sont définies avec vous avant le démarrage : interlocuteur, fréquence des échanges et étapes de validation.',
     },
     {
-        question: 'Intervenez-vous dans toute la RDC ?',
-        answer: 'Oui, nous intervenons dans toutes les provinces de la RDC. Nous avons déjà réalisé des projets à Kinshasa, Lubumbashi, Goma, Mbuji-Mayi et dans plusieurs autres villes.',
+        question: 'Quelles zones couvrez-vous ?',
+        answer: 'Nous intervenons depuis Durba, dans la province du Haut-Uélé. Les demandes pour d’autres provinces de la République Démocratique du Congo et pour l’Ouganda sont étudiées au cas par cas, en fonction de la localisation et de la nature du projet.',
     },
     {
-        question: 'Puis-je suivre l\'avancement de mon chantier ?',
-        answer: 'Absolument. Nous mettons en place un reporting régulier avec des comptes rendus photographiques et des réunions de suivi tout au long du projet.',
+        question: 'Les modalités de garantie sont-elles précisées ?',
+        answer: 'Les conditions applicables sont précisées dans le devis et le contrat.',
     },
 ]

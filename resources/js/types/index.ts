@@ -14,14 +14,58 @@ export interface SocialLink {
 export interface CompanyInfo {
     name: string
     legalName: string
-    slogan: string
+    slogan?: string
     description: string
     address: Address
-    phone: string
-    email: string
-    hours: string
-    gps: GpsCoordinates
+    phone?: string
+    email?: string
+    hours?: string
+    gps?: GpsCoordinates | null
     social: SocialLink[]
+}
+
+export interface ContactSubject {
+    value: string
+    label: string
+}
+
+export interface PhoneNumber {
+    label: string
+    display: string
+    e164: string
+    area?: string
+}
+
+export interface WhatsAppContact {
+    label: string
+    display: string
+    e164: string
+    url: string
+}
+
+export interface SiteInfo {
+    name: string
+    short_name: string
+    legal_name: string
+    tagline: string
+    slogan: string
+    description: string
+    url: string
+    locale: string
+    logo: string
+    logo_dark: string
+    og_image: string
+    contact: {
+        address: Address
+        phones: PhoneNumber[]
+        whatsapp: WhatsAppContact | null
+        email: string
+        website: string
+        hours: string
+        gps: GpsCoordinates | null
+    }
+    social: SocialLink[]
+    contact_subjects: ContactSubject[]
 }
 
 export interface Address {
@@ -38,6 +82,7 @@ export interface GpsCoordinates {
 }
 
 export interface ServiceItem {
+    slug?: string
     title: string
     description: string
     icon: string
@@ -100,7 +145,7 @@ export interface ValueItem {
 export interface AboutPreview {
     title: string
     content: string
-    image: string
+    image?: string
     values: ValueItem[]
     cta: { label: string; href: string }
 }
@@ -136,6 +181,8 @@ export interface ProcessStep {
 export interface Partner {
     name: string
     logo: string
+    description?: string | null
+    website_url?: string | null
 }
 
 export interface NewsArticle {
@@ -163,7 +210,7 @@ export interface HistoryItem {
 
 export interface ServiceDetail extends ServiceItem {
     slug: string
-    image: string
+    image?: string
     deliverables: string[]
     benefits: string[]
 }
@@ -177,7 +224,7 @@ export interface CompanyValue {
 export interface MissionVision {
     title: string
     description: string
-    image: string
+    image?: string
     callout?: string
 }
 
