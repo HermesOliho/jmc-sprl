@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref } from 'vue'
 import { useForm, usePage } from '@inertiajs/vue3'
 import TextInput from '@/Components/ui/inputs/TextInput.vue'
 import TextArea from '@/Components/ui/inputs/TextArea.vue'
@@ -32,6 +32,7 @@ const form = useForm({
 
 const flash = computed(() => page.props.flash as { status?: string; error?: string } | undefined)
 const successMessage = ref('')
+const contactForm = ref<HTMLFormElement | null>(null)
 
 onMounted(() => {
     if (typeof window === 'undefined') {
@@ -60,6 +61,11 @@ function submit(): void {
     successMessage.value = ''
     form.post('/contact', {
         preserveScroll: true,
+        onError: async () => {
+            await nextTick()
+            const firstInvalidField = contactForm.value?.querySelector<HTMLElement>('[aria-invalid="true"]')
+            firstInvalidField?.focus()
+        },
         onSuccess: (page) => {
             const incoming = page.props.flash as { status?: string; error?: string } | undefined
             successMessage.value = incoming?.error ? '' : (incoming?.status ?? 'Votre message a bien été transmis.')
@@ -75,6 +81,7 @@ function submit(): void {
             v-if="successMessage || flash?.status"
             class="mb-5 rounded-lg border border-[var(--color-success)]/30 bg-[var(--color-success)]/10 px-4 py-3 text-sm text-[var(--color-success)]"
             role="status"
+            aria-live="polite"
         >
             {{ successMessage || flash?.status }}
         </div>
@@ -86,7 +93,11 @@ function submit(): void {
             {{ flash.error }}
         </div>
 
-        <form class="space-y-5" @submit.prevent="submit" novalidate>
+        <p class="mb-5 text-sm leading-relaxed text-[var(--color-content-muted)]">
+            Les champs marqués d’un astérisque sont obligatoires. Nous utiliserons vos coordonnées uniquement pour répondre à votre demande.
+        </p>
+
+        <form ref="contactForm" class="space-y-5" @submit.prevent="submit" novalidate>
             <div class="hidden" aria-hidden="true">
                 <label for="website">Site web</label>
                 <input
@@ -178,6 +189,9 @@ function submit(): void {
                     <input
                         v-model="form.consent"
                         type="checkbox"
+                        required
+                        :aria-invalid="!!form.errors.consent"
+                        :aria-describedby="form.errors.consent ? 'consent-error' : undefined"
                         class="mt-1 h-4 w-4 rounded border-[var(--color-border-strong)] text-[var(--color-action)] focus:ring-[var(--color-action)]"
                     />
                     <span class="text-sm text-[var(--color-content-muted)]">
@@ -187,6 +201,7 @@ function submit(): void {
                 </label>
                 <p
                     v-if="form.errors.consent"
+                    id="consent-error"
                     class="mt-1 text-sm text-[var(--color-error)]"
                     role="alert"
                 >
@@ -194,8 +209,13 @@ function submit(): void {
                 </p>
             </div>
 
-            <PrimaryButton type="submit" size="lg" :disabled="form.processing">
-                <Icon name="send" :size="18" />
+            <PrimaryButton
+                type="submit"
+                size="lg"
+                :loading="form.processing"
+                :aria-busy="form.processing"
+            >
+                <Icon v-if="!form.processing" name="send" :size="18" />
                 {{ form.processing ? 'Envoi en cours…' : 'Envoyer le message' }}
             </PrimaryButton>
         </form>

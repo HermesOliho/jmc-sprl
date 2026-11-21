@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 beforeEach(function () {
     config()->set('inertia.testing.ensure_pages_exist', false);
 });

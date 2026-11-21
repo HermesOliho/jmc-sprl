@@ -101,7 +101,7 @@ const submit = () => {
                                 id="bio"
                                 v-model="form.bio"
                                 rows="4"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
+                                class="mt-1 block w-full rounded-md border-[var(--color-border-strong)] shadow-sm focus:border-[var(--color-action)] focus:ring-[var(--color-action)]"
                             />
                             <InputError class="mt-2" :message="form.errors.bio" />
                         </div>
@@ -122,7 +122,7 @@ const submit = () => {
                         <div>
                             <div class="flex items-center justify-between">
                                 <InputLabel value="Liens sociaux" />
-                                <button type="button" class="text-sm text-indigo-600 hover:underline" @click="addSocialLink">
+                                <button type="button" class="text-sm text-[var(--color-link)] hover:underline" @click="addSocialLink">
                                     + Ajouter un lien
                                 </button>
                             </div>
@@ -135,7 +135,7 @@ const submit = () => {
                                     <div>
                                         <select
                                             v-model="link.name"
-                                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300"
+                                            class="block w-full rounded-md border-[var(--color-border-strong)] shadow-sm focus:border-[var(--color-action)] focus:ring-[var(--color-action)]"
                                         >
                                             <option value="" disabled>Sélectionner un réseau</option>
                                             <option
@@ -200,7 +200,7 @@ const submit = () => {
                                 id="photo"
                                 type="file"
                                 accept="image/jpeg,image/png,image/webp"
-                                class="mt-1 block w-full text-sm text-gray-600 file:mr-4 file:rounded-md file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100"
+                                class="mt-1 block w-full text-sm text-[var(--color-content-muted)] file:mr-4 file:rounded-md file:border-0 file:bg-[var(--color-action)]/10 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-[var(--color-link)] hover:file:bg-[var(--color-action)]/15"
                                 @change="onPhotoChange"
                             />
                             <InputError class="mt-2" :message="form.errors.photo" />

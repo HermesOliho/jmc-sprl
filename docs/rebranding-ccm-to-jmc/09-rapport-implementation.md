@@ -46,10 +46,10 @@
 ### Pages
 
 - Accueil : hero, présentation, services, approche, processus, CTA, partenaires dynamiques.
-- À propos : présentation, valeurs, engagement, approche, raisons de nous choisir.
-- Services : 12 services existants, ancres stables, approche, processus, FAQ.
+- À propos : présentation, valeurs, engagement, approche, raisons de nous choisir, membres d’équipe gérés depuis l’administration.
+- Services : catalogue de 16 services géré en base de données, 9 mis en avant sur l’accueil, ancres stables, approche, processus, FAQ.
 - Contact : coordonnées officielles, formulaire fonctionnel, FAQ.
-- Mentions légales et politique de confidentialité.
+- Mentions légales et politique de confidentialité (en attente de validation, en `noindex`).
 - Pages d'erreur 403/404/500/503 branchées sur Inertia.
 - Redirections 301 pour les anciennes entrées de navigation.
 
@@ -75,13 +75,24 @@
 - Pages internes en `noindex, nofollow`.
 - `lang="fr"`.
 
+### Administration
+
+- Accès restreint au rôle `admin`.
+- Gestion des utilisateurs, partenaires, membres d’équipe et services.
+- Médias servis via `public/storage`.
+
+### Dépendances
+
+- Retrait de `@vee-validate/zod`, `vee-validate`, `apexcharts`, `vue3-apexcharts` et `@vueuse/core`.
+- `npm audit --omit=dev` : aucune vulnérabilité de production.
+
 ### Sécurité et qualité
 
 - Inscription publique désactivée par défaut (`AUTH_REGISTRATION_ENABLED=false`).
 - Honeypot et limitation de débit sur le formulaire.
 - CSRF via Inertia.
 - Suppression des `console.log` de démonstration.
-- Tests : 57 tests, 289 assertions.
+- Tests : 80 tests, 450 assertions.
 - Build frontend et vérification TypeScript passés.
 
 ---
@@ -127,7 +138,7 @@ php artisan optimize
 ## 4. Éléments volontairement non publiés
 
 - Historique CCM.
-- Équipe nominative.
+- Équipe nominative non validée (les profils publiés sont gérés depuis l’administration).
 - Certifications ISO/OHSAS/RSE.
 - Projets et actualités fictifs.
 - Chiffres non vérifiés (nombre de projets, effectifs, années).
@@ -138,7 +149,7 @@ php artisan optimize
 
 ## 5. Vérifications effectuées
 
-- `php artisan test --compact` : 57 tests réussis.
+- `php artisan test --compact` : 80 tests réussis.
 - `npm run build` : build client + SSR réussi.
 - `npx vue-tsc --noEmit` : aucune erreur.
 - Crawl HTTP des pages publiques : 200, redirections 301, 404 corrects.

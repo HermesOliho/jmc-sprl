@@ -93,7 +93,7 @@ const destroy = (member: AdminTeamMember) => {
                                         </span>
                                         <span
                                             v-else
-                                            class="inline-flex rounded-full bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-700"
+                                            class="inline-flex rounded-full bg-[var(--color-surface-muted)] px-2 py-1 text-xs font-semibold text-[var(--color-content-muted)]"
                                         >
                                             Inactif
                                         </span>

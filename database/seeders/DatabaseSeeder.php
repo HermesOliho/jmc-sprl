@@ -45,5 +45,7 @@ class DatabaseSeeder extends Seeder
         if (! $user->hasRole('admin')) {
             $user->assignRole('admin');
         }
+
+        $this->call(ServiceSeeder::class);
     }
 }

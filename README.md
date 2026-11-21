@@ -27,8 +27,8 @@ Les anciennes entrées `/demande-devis`, `/realisations`, `/carrieres` et `/actu
 - Formulaire de contact avec validation serveur, limitation de débit et envoi par e-mail.
 - Métadonnées SEO rendues côté serveur (title, description, canonical, Open Graph, Twitter Cards, JSON-LD).
 - Sitemap XML et `robots.txt`.
-- Espace d'administration pour les utilisateurs et les partenaires.
-- Carrousel de partenaires alimenté par la base de données.
+- Espace d'administration pour les utilisateurs, les partenaires, les membres de l'équipe et les services.
+- Carrousel de partenaires et catalogue de services alimentés par la base de données.
 
 ## Configuration
 

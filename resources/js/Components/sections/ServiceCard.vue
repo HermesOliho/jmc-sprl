@@ -16,7 +16,7 @@ defineProps<{
             <img
                 :src="service.image"
                 :alt="service.image_alt || service.title"
-                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
                 :style="service.image_position ? { objectPosition: service.image_position } : undefined"
                 width="1200"
                 height="675"
@@ -25,10 +25,7 @@ defineProps<{
             />
         </div>
         <ServiceIllustration v-else :icon="service.icon" />
-        <div class="flex items-center gap-4 border-b border-[var(--color-border)] bg-[var(--color-surface-muted)] p-6">
-            <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[var(--color-action)] text-white">
-                <Icon :name="service.icon" :size="26" />
-            </div>
+        <div class="flex items-center border-b border-[var(--color-border)] bg-[var(--color-surface-muted)] p-6">
             <h3 class="text-xl font-bold text-[var(--color-content)]">
                 {{ service.title }}
             </h3>

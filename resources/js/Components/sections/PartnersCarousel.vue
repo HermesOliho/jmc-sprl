@@ -36,7 +36,7 @@ defineProps<{
                         <img
                             :src="partner.logo"
                             :alt="partner.name"
-                            class="h-20 w-auto object-contain opacity-50 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 md:h-20"
+                            class="h-20 w-auto object-contain opacity-50 grayscale transition-all duration-200 group-hover:opacity-100 group-hover:grayscale-0 md:h-20"
                             width="220"
                             height="100"
                             loading="lazy"

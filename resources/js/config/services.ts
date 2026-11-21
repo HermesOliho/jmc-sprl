@@ -1,9 +1,7 @@
-import type { ProcessStep } from '@/types'
-
 export const SERVICES_HERO = {
     title: 'Nos services',
     subtitle:
-        'Une gamme de services couvrant la construction, les infrastructures, la fourniture de matériaux, le transport et les prestations associées. Les modalités de chaque intervention sont précisées dans le devis.',
+        'Une gamme de services couvrant la construction, les infrastructures et les prestations associées. Les modalités de chaque intervention sont précisées dans le devis.',
 }
 
 export const SERVICES_PROCESS = [
@@ -53,8 +51,8 @@ export const SERVICES_FAQ = [
         answer: 'Les modalités de suivi sont définies avec vous avant le démarrage : interlocuteur, fréquence des échanges et étapes de validation.',
     },
     {
-        question: 'Quelles zones couvrez-vous ?',
-        answer: 'Nous intervenons depuis Durba, dans la province du Haut-Uélé. Les demandes pour d’autres provinces de la République Démocratique du Congo et pour l’Ouganda sont étudiées au cas par cas, en fonction de la localisation et de la nature du projet.',
+        question: 'Intervenez-vous en dehors de Durba ?',
+        answer: 'Les demandes sont étudiées au cas par cas, en fonction de la localisation et de la nature du projet, en RDC comme en Ouganda.',
     },
     {
         question: 'Les modalités de garantie sont-elles précisées ?',

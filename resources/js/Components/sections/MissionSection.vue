@@ -26,9 +26,6 @@ defineProps<{
                 />
                 <div v-else class="overflow-hidden rounded-2xl bg-[var(--color-brand-navy-dark)] p-5 shadow-lg md:p-8">
                     <BrandIllustration :variant="reversed ? 'planning' : 'construction'" />
-                    <p class="mt-2 text-center text-xs font-medium tracking-wide text-white/60">
-                        Illustration conceptuelle
-                    </p>
                 </div>
             </SlideLeft>
 

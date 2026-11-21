@@ -6,7 +6,7 @@ import Container from '@/Components/ui/Container.vue'
 import Icon from '@/Components/ui/icons/Icon.vue'
 import BrandIllustration from '@/Components/illustrations/BrandIllustration.vue'
 import { useSite } from '@/composables'
-import { classNames } from '@/utils'
+import { classNames, shouldReduceMotion } from '@/utils'
 import type { HomeHero } from '@/types'
 
 const props = withDefaults(defineProps<{
@@ -23,14 +23,14 @@ const contentRef = ref<HTMLElement | null>(null)
 const statsRef = ref<HTMLElement | null>(null)
 
 onMounted(() => {
-    if (contentRef.value) {
+    if (!shouldReduceMotion() && contentRef.value) {
         animate(
             contentRef.value,
             { opacity: [0, 1], y: [30, 0] },
             { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
         )
     }
-    if (statsRef.value && props.data.stats.length > 0) {
+    if (!shouldReduceMotion() && statsRef.value && props.data.stats.length > 0) {
         animate(
             statsRef.value,
             { opacity: [0, 1], y: [20, 0] },
@@ -103,9 +103,6 @@ onMounted(() => {
                     <div class="overflow-hidden rounded-[2rem] border border-white/15 bg-white/5 p-4 shadow-2xl shadow-black/20 backdrop-blur-sm md:p-6">
                         <BrandIllustration variant="construction" class="w-full" />
                     </div>
-                    <p class="mt-3 text-center text-xs font-medium tracking-wide text-white/60">
-                        Illustration conceptuelle · Construction et infrastructures
-                    </p>
                 </div>
             </div>
             <div

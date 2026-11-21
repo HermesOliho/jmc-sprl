@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Partner;
-use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,7 +11,7 @@ beforeEach(function () {
 });
 
 test('authenticated users can view the partners list', function () {
-    $user = User::factory()->create();
+    $user = adminUser();
     Partner::factory()->count(2)->create();
 
     $this->actingAs($user)
@@ -25,7 +24,7 @@ test('authenticated users can view the partners list', function () {
 });
 
 test('authenticated users can create a partner with a logo', function () {
-    $user = User::factory()->create();
+    $user = adminUser();
 
     $response = $this->actingAs($user)->post(route('admin.partners.store'), [
         'name' => 'Partenaire Test',
@@ -51,7 +50,7 @@ test('authenticated users can create a partner with a logo', function () {
 });
 
 test('authenticated users can update a partner', function () {
-    $user = User::factory()->create();
+    $user = adminUser();
     $partner = Partner::factory()->create([
         'name' => 'Ancien',
         'is_active' => true,
@@ -85,7 +84,7 @@ test('authenticated users can update a partner', function () {
 });
 
 test('authenticated users can delete a partner', function () {
-    $user = User::factory()->create();
+    $user = adminUser();
     $partner = Partner::factory()->create();
 
     $response = $this->actingAs($user)->delete(route('admin.partners.destroy', $partner));

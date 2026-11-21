@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { animate } from 'motion-v'
+import { shouldReduceMotion } from '@/utils'
 
 const props = withDefaults(defineProps<{
     delay?: number
@@ -17,7 +18,7 @@ const props = withDefaults(defineProps<{
 const target = ref<HTMLElement | null>(null)
 
 onMounted(() => {
-    if (!target.value) return
+    if (!target.value || shouldReduceMotion()) return
     animate(
         target.value,
         { opacity: [0, 1], y: [props.distance, 0] },

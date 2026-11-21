@@ -9,7 +9,7 @@ beforeEach(function () {
 });
 
 test('authenticated users can view the users list', function () {
-    $admin = User::factory()->create();
+    $admin = adminUser();
     $users = User::factory()->count(2)->create();
 
     $this->actingAs($admin)
@@ -22,7 +22,7 @@ test('authenticated users can view the users list', function () {
 });
 
 test('authenticated users can create a user', function () {
-    $admin = User::factory()->create();
+    $admin = adminUser();
 
     $response = $this->actingAs($admin)->post(route('admin.users.store'), [
         'name' => 'Nouvel Utilisateur',
@@ -45,7 +45,7 @@ test('authenticated users can create a user', function () {
 });
 
 test('authenticated users can create an admin user', function () {
-    $admin = User::factory()->create();
+    $admin = adminUser();
 
     $this->actingAs($admin)->post(route('admin.users.store'), [
         'name' => 'Admin Créé',
@@ -61,7 +61,7 @@ test('authenticated users can create an admin user', function () {
 });
 
 test('authenticated users can update a user', function () {
-    $admin = User::factory()->create();
+    $admin = adminUser();
     $user = User::factory()->create([
         'name' => 'Ancien Nom',
         'email' => 'ancien@example.com',
@@ -87,7 +87,7 @@ test('authenticated users can update a user', function () {
 });
 
 test('users cannot remove their own admin access from the admin panel', function () {
-    $admin = User::factory()->create();
+    $admin = adminUser();
     $admin->assignRole('admin');
 
     $response = $this->actingAs($admin)->put(route('admin.users.update', $admin), [
@@ -106,7 +106,7 @@ test('users cannot remove their own admin access from the admin panel', function
 });
 
 test('authenticated users can delete another user', function () {
-    $admin = User::factory()->create();
+    $admin = adminUser();
     $user = User::factory()->create();
 
     $response = $this->actingAs($admin)->delete(route('admin.users.destroy', $user));
@@ -119,7 +119,7 @@ test('authenticated users can delete another user', function () {
 });
 
 test('users cannot delete their own account from the admin panel', function () {
-    $admin = User::factory()->create();
+    $admin = adminUser();
 
     $response = $this->actingAs($admin)->delete(route('admin.users.destroy', $admin));
 

@@ -45,9 +45,6 @@ defineProps<{
                     class="mx-auto w-full max-w-xs rounded-3xl border border-white/15 bg-white/5 p-3 md:max-w-none"
                 >
                     <BrandIllustration :variant="illustration" />
-                    <p class="pb-1 text-center text-[10px] font-semibold uppercase tracking-[0.16em] text-white/55">
-                        Illustration conceptuelle
-                    </p>
                 </div>
             </div>
         </Container>

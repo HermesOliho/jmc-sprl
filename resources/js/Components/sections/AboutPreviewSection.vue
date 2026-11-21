@@ -37,9 +37,6 @@ defineProps<{
                         class="overflow-hidden rounded-2xl bg-[var(--color-brand-navy-dark)] p-5 shadow-lg md:p-8"
                     >
                         <BrandIllustration variant="organization" />
-                        <p class="mt-2 text-center text-xs font-medium tracking-wide text-white/60">
-                            Illustration conceptuelle
-                        </p>
                     </div>
                 </div>
             </SlideLeft>

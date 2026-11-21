@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
 import { animate } from 'motion-v'
+import { shouldReduceMotion } from '@/utils'
 
 const props = withDefaults(defineProps<{
     delay?: number
@@ -18,7 +19,7 @@ const container = ref<HTMLElement | null>(null)
 
 onMounted(async () => {
     await nextTick()
-    if (!container.value) return
+    if (!container.value || shouldReduceMotion()) return
     const items = Array.from(container.value.children) as HTMLElement[]
 
     items.forEach((child, i) => {

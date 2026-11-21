@@ -8,23 +8,23 @@ import { NAVIGATION } from '@/config/navigation';
 import { useAppStore } from '@/stores';
 import { classNames } from '@/utils';
 import { Link, usePage } from '@inertiajs/vue3';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
-const { isScrolled, scrollDirection } = useScroll();
+const { isScrolled } = useScroll();
 const { isDark, toggle } = useTheme();
 const appStore = useAppStore();
 const page = usePage();
 const site = useSite();
+const mobileMenuButton = ref<HTMLButtonElement | null>(null);
 
-const isHidden = ref(false);
-
-watch(scrollDirection, (dir) => {
-    if (dir === 'down' && isScrolled.value) {
-        isHidden.value = true;
-    } else {
-        isHidden.value = false;
+function closeMobileMenu(): void {
+    if (!appStore.isMobileMenuOpen) {
+        return;
     }
-});
+
+    appStore.closeMobileMenu();
+    mobileMenuButton.value?.focus();
+}
 
 function isActive(href: string): boolean {
     const url = page.url;
@@ -37,13 +37,13 @@ function isActive(href: string): boolean {
     <header
         :class="
             classNames(
-                'fixed top-0 right-0 left-0 z-40 border-b border-[var(--color-border)] transition-all duration-500 ease-in-out',
+                'fixed top-0 right-0 left-0 z-40 border-b border-[var(--color-border)] transition-[background-color,box-shadow] duration-200',
                 isScrolled
                     ? 'bg-[var(--color-surface)]/90 shadow-sm backdrop-blur-xl'
                     : 'bg-[var(--color-surface)]/80 backdrop-blur-md',
-                isHidden ? '-translate-y-full' : 'translate-y-0',
             )
         "
+        @keydown.esc="closeMobileMenu"
     >
         <Container>
             <nav
@@ -79,6 +79,7 @@ function isActive(href: string): boolean {
 
                 <div class="flex items-center gap-2">
                     <button
+                        ref="mobileMenuButton"
                         type="button"
                         class="rounded-lg p-2.5 text-[var(--color-content-muted)] transition-colors hover:bg-[var(--color-action)]/10 hover:text-[var(--color-link)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-orange)]"
                         :aria-label="isDark ? 'Activer le thème clair' : 'Activer le thème sombre'"
@@ -101,7 +102,7 @@ function isActive(href: string): boolean {
                     <button
                         type="button"
                         class="rounded-lg p-2 text-[var(--color-content-muted)] transition-colors hover:bg-[var(--color-action)]/10 hover:text-[var(--color-link)] lg:hidden"
-                        aria-label="Menu"
+                        :aria-label="appStore.isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
                         aria-controls="mobile-navigation"
                         :aria-expanded="appStore.isMobileMenuOpen"
                         @click="appStore.toggleMobileMenu()"
@@ -128,7 +129,7 @@ function isActive(href: string): boolean {
                 id="mobile-navigation"
                 class="border-t border-[var(--color-border)] bg-[var(--color-surface)] lg:hidden"
             >
-                <Container class="py-4">
+                <Container class="max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain py-4">
                     <div class="flex flex-col gap-1">
                         <Link
                             v-for="item in NAVIGATION"

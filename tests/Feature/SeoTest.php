@@ -23,6 +23,19 @@ test('le sitemap contient les pages publiques', function () {
         ->assertSee(url('/contact'));
 });
 
+test('les pages légales en attente de validation ne sont pas indexables', function () {
+    $this->get('/mentions-legales')
+        ->assertOk()
+        ->assertSee('noindex, nofollow', false);
+});
+
+test('le sitemap exclut les pages noindex', function () {
+    $this->get('/sitemap.xml')
+        ->assertOk()
+        ->assertDontSee('/mentions-legales')
+        ->assertDontSee('/politique-de-confidentialite');
+});
+
 test('les pages internes ne sont pas indexables', function () {
     $this->get('/login')
         ->assertOk()
