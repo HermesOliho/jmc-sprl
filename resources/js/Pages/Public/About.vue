@@ -8,6 +8,7 @@ import CtaSection from '@/Components/sections/CtaSection.vue'
 import ValuesGrid from '@/Components/sections/ValuesGrid.vue'
 import MissionSection from '@/Components/sections/MissionSection.vue'
 import FeaturesSection from '@/Components/sections/FeaturesSection.vue'
+import TeamSection from '@/Components/sections/TeamSection.vue'
 import {
     ABOUT_HERO,
     ABOUT_PRESENTATION,
@@ -17,6 +18,16 @@ import {
     ABOUT_WHY_US,
 } from '@/config/about'
 import { CTA_SECTION } from '@/config/home'
+import type { TeamMember } from '@/types'
+
+withDefaults(
+    defineProps<{
+        teamMembers?: TeamMember[]
+    }>(),
+    {
+        teamMembers: () => [],
+    },
+)
 </script>
 
 <template>
@@ -49,6 +60,8 @@ import { CTA_SECTION } from '@/config/home'
         <MissionSection :data="ABOUT_VISION" reversed />
 
         <FeaturesSection :features="ABOUT_WHY_US.features" />
+
+        <TeamSection :members="teamMembers" />
 
         <CtaSection
             :title="CTA_SECTION.title"

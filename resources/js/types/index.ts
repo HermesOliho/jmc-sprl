@@ -8,7 +8,7 @@ export interface NavigationItem {
 export interface SocialLink {
     name: string
     url: string
-    icon: string
+    icon?: string
 }
 
 export interface CompanyInfo {
@@ -97,8 +97,10 @@ export interface StatsData {
 export interface TeamMember {
     name: string
     role: string
-    description?: string
-    avatar?: string
+    description?: string | null
+    avatar?: string | null
+    email?: string | null
+    phone?: string | null
     social?: SocialLink[]
 }
 

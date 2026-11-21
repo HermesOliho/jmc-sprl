@@ -55,6 +55,13 @@ const { isDark, toggle } = useTheme();
                                 >
                                     Partenaires
                                 </NavLink>
+                                <NavLink
+                                    v-if="$page.props.auth.can.accessAdmin"
+                                    :href="route('admin.team-members.index')"
+                                    :active="route().current('admin.team-members.*')"
+                                >
+                                    Membres
+                                </NavLink>
                             </div>
                         </div>
 
@@ -186,6 +193,13 @@ const { isDark, toggle } = useTheme();
                             :active="route().current('admin.partners.*')"
                         >
                             Partenaires
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            v-if="$page.props.auth.can.accessAdmin"
+                            :href="route('admin.team-members.index')"
+                            :active="route().current('admin.team-members.*')"
+                        >
+                            Membres
                         </ResponsiveNavLink>
                     </div>
 

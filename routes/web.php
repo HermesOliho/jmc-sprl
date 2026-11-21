@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\PartnerController as AdminPartnerController;
+use App\Http\Controllers\Admin\TeamMemberController as AdminTeamMemberController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Partner;
+use App\Models\TeamMember;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\Sitemap\Sitemap;
@@ -32,8 +34,24 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/a-propos', function () {
+    $teamMembers = TeamMember::query()
+        ->active()
+        ->ordered()
+        ->get()
+        ->map(fn (TeamMember $member): array => [
+            'name' => $member->name,
+            'role' => $member->role,
+            'description' => $member->bio,
+            'avatar' => $member->photo_url,
+            'email' => $member->email,
+            'phone' => $member->phone,
+            'social' => $member->social_links ?? [],
+        ])
+        ->values();
+
     return Inertia::render('Public/About', [
         'seo' => config('site.pages.about'),
+        'teamMembers' => $teamMembers,
     ]);
 })->name('about');
 
@@ -108,6 +126,7 @@ Route::middleware(['auth', 'verified', 'can:access-admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', AdminUserController::class)->except(['show']);
         Route::resource('partners', AdminPartnerController::class)->except(['show']);
+        Route::resource('team-members', AdminTeamMemberController::class)->except(['show']);
     });
 });
 
