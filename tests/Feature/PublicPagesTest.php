@@ -16,6 +16,7 @@ test('les pages publiques répondent et affichent l’identité JMC', function (
     ['/', 'Public/Home'],
     ['/a-propos', 'Public/About'],
     ['/services', 'Public/Services'],
+    ['/album', 'Public/Album/Index'],
     ['/contact', 'Public/Contact'],
     ['/mentions-legales', 'Public/LegalNotice'],
     ['/politique-de-confidentialite', 'Public/PrivacyPolicy'],

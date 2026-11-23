@@ -1,17 +1,25 @@
 <?php
 
+use App\Http\Controllers\Admin\AlbumController as AdminAlbumController;
+use App\Http\Controllers\Admin\AlbumPhotoController as AdminAlbumPhotoController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\PartnerController as AdminPartnerController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\TeamMemberController as AdminTeamMemberController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Album;
+use App\Models\AlbumPhoto;
 use App\Models\Partner;
 use App\Models\Service;
 use App\Models\TeamMember;
+use App\Support\AlbumData;
 use App\Support\ServiceData;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 use Inertia\Inertia;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
@@ -37,10 +45,20 @@ Route::get('/', function () {
         ->with('media')
         ->get();
 
+    $latestPhotos = AlbumPhoto::query()
+        ->published()
+        ->whereHas('album', fn (Builder $query): Builder => $query->published())
+        ->with(['album', 'media'])
+        ->latest()
+        ->orderByDesc('id')
+        ->limit(8)
+        ->get();
+
     return Inertia::render('Public/Home', [
         'seo' => config('site.pages.home'),
         'partners' => $partners,
         'services' => ServiceData::collection($services),
+        'latestPhotos' => AlbumData::latestPhotos($latestPhotos),
     ]);
 })->name('home');
 
@@ -78,6 +96,10 @@ Route::get('/services', function () {
         'services' => ServiceData::collection($services),
     ]);
 })->name('services');
+
+Route::get('/album', [AlbumController::class, 'index'])->name('album.index');
+
+Route::get('/album/{album:slug}', [AlbumController::class, 'show'])->name('album.show');
 
 Route::get('/contact', function () {
     $services = Service::query()
@@ -124,6 +146,7 @@ Route::redirect('/demande-devis', '/contact?subject=devis', 301);
 Route::redirect('/realisations', '/services', 301);
 Route::redirect('/carrieres', '/contact?subject=stage', 301);
 Route::redirect('/actualites', '/a-propos', 301);
+Route::redirect('/galerie', '/album', 301);
 
 Route::get('/services/{slug}', function (string $slug) {
     return redirect('/services#'.$slug, 301);
@@ -144,6 +167,21 @@ Route::get('/sitemap.xml', function () {
         );
     }
 
+    if (Schema::hasTable('albums')) {
+        Album::query()
+            ->published()
+            ->ordered()
+            ->get(['slug', 'updated_at'])
+            ->each(function (Album $album) use ($sitemap): void {
+                $sitemap->add(
+                    Url::create(config('site.url').'/album/'.$album->slug)
+                        ->setLastModificationDate($album->updated_at)
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                        ->setPriority(0.7),
+                );
+            });
+    }
+
     return $sitemap->toResponse(request());
 })->name('sitemap');
 
@@ -155,6 +193,18 @@ Route::middleware(['auth', 'verified', 'can:access-admin'])->group(function () {
         Route::resource('partners', AdminPartnerController::class)->except(['show']);
         Route::resource('team-members', AdminTeamMemberController::class)->except(['show']);
         Route::resource('services', AdminServiceController::class)->except(['show']);
+        Route::resource('albums', AdminAlbumController::class)->except(['show']);
+
+        Route::prefix('albums/{album}')->name('albums.')->group(function () {
+            Route::post('photos', [AdminAlbumPhotoController::class, 'store'])->name('photos.store');
+            Route::patch('photos/reorder', [AdminAlbumPhotoController::class, 'reorder'])->name('photos.reorder');
+            Route::patch('photos/{albumPhoto}', [AdminAlbumPhotoController::class, 'update'])
+                ->whereNumber('albumPhoto')
+                ->name('photos.update');
+            Route::delete('photos/{albumPhoto}', [AdminAlbumPhotoController::class, 'destroy'])
+                ->whereNumber('albumPhoto')
+                ->name('photos.destroy');
+        });
     });
 });
 

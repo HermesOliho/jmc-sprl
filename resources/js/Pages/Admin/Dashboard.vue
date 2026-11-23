@@ -11,6 +11,9 @@ defineProps<{
         active_team_members: number;
         services: number;
         active_services: number;
+        albums: number;
+        published_albums: number;
+        photos: number;
     };
 }>();
 </script>
@@ -53,6 +56,19 @@ defineProps<{
                         <div class="mt-2 text-3xl font-semibold text-[var(--color-content)]">
                             {{ stats.active_services }}
                             <span class="text-base font-normal text-[var(--color-content-muted)]">/ {{ stats.services }}</span>
+                        </div>
+                    </div>
+                    <div class="overflow-hidden bg-[var(--color-surface)] p-6 shadow-sm sm:rounded-lg">
+                        <div class="text-sm text-[var(--color-content-muted)]">Albums publiés</div>
+                        <div class="mt-2 text-3xl font-semibold text-[var(--color-content)]">
+                            {{ stats.published_albums }}
+                            <span class="text-base font-normal text-[var(--color-content-muted)]">/ {{ stats.albums }}</span>
+                        </div>
+                    </div>
+                    <div class="overflow-hidden bg-[var(--color-surface)] p-6 shadow-sm sm:rounded-lg">
+                        <div class="text-sm text-[var(--color-content-muted)]">Photos</div>
+                        <div class="mt-2 text-3xl font-semibold text-[var(--color-content)]">
+                            {{ stats.photos }}
                         </div>
                     </div>
                 </div>
@@ -100,6 +116,17 @@ defineProps<{
                         </h3>
                         <p class="mt-2 text-sm text-[var(--color-content-muted)]">
                             Gérer les services affichés sur l’accueil et la page Services.
+                        </p>
+                    </Link>
+                    <Link
+                        :href="route('admin.albums.index')"
+                        class="block overflow-hidden bg-[var(--color-surface)] p-6 shadow-sm transition hover:shadow-md sm:rounded-lg"
+                    >
+                        <h3 class="text-lg font-medium text-[var(--color-content)]">
+                            Gestion de l’album photo
+                        </h3>
+                        <p class="mt-2 text-sm text-[var(--color-content-muted)]">
+                            Créer des albums et publier les photos affichées sur le site.
                         </p>
                     </Link>
                 </div>

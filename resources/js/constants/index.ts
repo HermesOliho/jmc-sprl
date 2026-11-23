@@ -5,6 +5,7 @@ export const APP_DESCRIPTION =
 export const ROUTE_HOME = '/'
 export const ROUTE_ABOUT = '/a-propos'
 export const ROUTE_SERVICES = '/services'
+export const ROUTE_ALBUM = '/album'
 export const ROUTE_CONTACT = '/contact'
 export const ROUTE_LEGAL = '/mentions-legales'
 export const ROUTE_PRIVACY = '/politique-de-confidentialite'

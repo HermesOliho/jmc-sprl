@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Album;
+
 beforeEach(function () {
     config()->set('inertia.testing.ensure_pages_exist', false);
 });
@@ -20,7 +22,18 @@ test('le sitemap contient les pages publiques', function () {
         ->assertSee(url('/'))
         ->assertSee(url('/a-propos'))
         ->assertSee(url('/services'))
+        ->assertSee(url('/album'))
         ->assertSee(url('/contact'));
+});
+
+test('le sitemap contient les albums publiés et exclut les brouillons', function () {
+    $published = Album::factory()->published()->create(['slug' => 'album-publie']);
+    $draft = Album::factory()->create(['slug' => 'album-brouillon']);
+
+    $this->get('/sitemap.xml')
+        ->assertOk()
+        ->assertSee(url('/album/'.$published->slug))
+        ->assertDontSee(url('/album/'.$draft->slug));
 });
 
 test('les pages légales en attente de validation ne sont pas indexables', function () {

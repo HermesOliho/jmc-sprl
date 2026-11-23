@@ -34,7 +34,10 @@
             $description = $seo['description'] ?? ($site['description'] ?? config('site.description'));
             $path = $seo['path'] ?? ('/'.ltrim(request()->path(), '/'));
             $canonical = $siteUrl.$path;
-            $ogImage = $siteUrl.($site['og_image'] ?? config('site.og_image'));
+            $ogImagePath = $seo['og_image'] ?? ($site['og_image'] ?? config('site.og_image'));
+            $ogImage = str_starts_with((string) $ogImagePath, 'http')
+                ? $ogImagePath
+                : $siteUrl.$ogImagePath;
             $organization = [
                 '@type' => 'Organization',
                 '@id' => $siteUrl.'/#organization',

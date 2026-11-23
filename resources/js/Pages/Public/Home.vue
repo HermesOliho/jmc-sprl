@@ -4,21 +4,24 @@ import SeoHead from '@/Components/common/SeoHead.vue'
 import HeroBanner from '@/Components/sections/HeroBanner.vue'
 import AboutPreviewSection from '@/Components/sections/AboutPreviewSection.vue'
 import ServicesPreviewSection from '@/Components/sections/ServicesPreviewSection.vue'
+import LatestPhotosCarousel from '@/Components/sections/LatestPhotosCarousel.vue'
 import FeaturesSection from '@/Components/sections/FeaturesSection.vue'
 import ProcessSection from '@/Components/sections/ProcessSection.vue'
 import PartnersCarousel from '@/Components/sections/PartnersCarousel.vue'
 import CtaSection from '@/Components/sections/CtaSection.vue'
 import { HOME_HERO, ABOUT_PREVIEW, FEATURES, PROCESS, CTA_SECTION } from '@/config/home'
-import type { Partner, ServiceDetail } from '@/types'
+import type { LatestAlbumPhoto, Partner, ServiceDetail } from '@/types'
 
 withDefaults(
     defineProps<{
         partners?: Partner[]
         services?: ServiceDetail[]
+        latestPhotos?: LatestAlbumPhoto[]
     }>(),
     {
         partners: () => [],
         services: () => [],
+        latestPhotos: () => [],
     },
 )
 </script>
@@ -38,6 +41,8 @@ withDefaults(
         <AboutPreviewSection :data="ABOUT_PREVIEW" />
 
         <ServicesPreviewSection :services="services" />
+
+        <LatestPhotosCarousel :photos="latestPhotos" />
 
         <FeaturesSection :features="FEATURES" />
 

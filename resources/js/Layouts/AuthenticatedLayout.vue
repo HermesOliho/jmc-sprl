@@ -33,7 +33,7 @@ const { isDark, toggle } = useTheme();
                             </div>
 
                             <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                class="hidden space-x-5 sm:-my-px sm:ms-6 sm:flex"
                             >
                                 <NavLink
                                     :href="route('dashboard')"
@@ -68,6 +68,13 @@ const { isDark, toggle } = useTheme();
                                     :active="route().current('admin.services.*')"
                                 >
                                     Services
+                                </NavLink>
+                                <NavLink
+                                    v-if="$page.props.auth.can.accessAdmin"
+                                    :href="route('admin.albums.index')"
+                                    :active="route().current('admin.albums.*')"
+                                >
+                                    Albums
                                 </NavLink>
                             </div>
                         </div>
@@ -214,6 +221,13 @@ const { isDark, toggle } = useTheme();
                             :active="route().current('admin.services.*')"
                         >
                             Services
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            v-if="$page.props.auth.can.accessAdmin"
+                            :href="route('admin.albums.index')"
+                            :active="route().current('admin.albums.*')"
+                        >
+                            Albums
                         </ResponsiveNavLink>
                     </div>
 

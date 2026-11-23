@@ -31,5 +31,10 @@ test('admin users can visit the admin dashboard', function () {
             ->has('stats.active_partners')
             ->has('stats.team_members')
             ->has('stats.active_team_members')
+            ->has('stats.services')
+            ->has('stats.active_services')
+            ->has('stats.albums')
+            ->has('stats.published_albums')
+            ->has('stats.photos')
         );
 });

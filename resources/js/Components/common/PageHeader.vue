@@ -10,6 +10,7 @@ defineProps<{
     subtitle?: string
     breadcrumbs?: BreadcrumbItem[]
     illustration?: 'construction' | 'planning' | 'location' | 'organization'
+    backgroundImage?: string
     class?: string
 }>()
 </script>
@@ -21,11 +22,21 @@ defineProps<{
             $props.class,
         )"
     >
+        <img
+            v-if="backgroundImage"
+            :src="backgroundImage"
+            alt=""
+            class="absolute inset-0 h-full w-full object-cover opacity-30"
+        />
+        <div
+            v-if="backgroundImage"
+            class="absolute inset-0 bg-gradient-to-r from-[var(--color-brand-navy)] via-[var(--color-brand-navy)]/85 to-[var(--color-brand-navy)]/40"
+        />
         <div
             class="absolute inset-0 opacity-10"
             style="background-image: radial-gradient(circle at 25% 25%, white 1px, transparent 1px); background-size: 40px 40px;"
         />
-        <Container>
+        <Container class="relative z-10">
             <div :class="illustration ? 'grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(14rem,0.65fr)] md:gap-12' : ''">
                 <div>
                     <Breadcrumb

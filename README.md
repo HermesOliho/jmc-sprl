@@ -15,6 +15,7 @@ Site web institutionnel de **JMC Services S.P.R.L**, construit avec Laravel, Ine
 - `/` — accueil
 - `/a-propos` — présentation, valeurs et approche
 - `/services` — services et FAQ
+- `/album` — albums photo et visionneuse
 - `/contact` — coordonnées et formulaire
 - `/mentions-legales` — structure à compléter par la direction
 - `/politique-de-confidentialite` — structure à compléter par la direction
@@ -28,6 +29,8 @@ Les anciennes entrées `/demande-devis`, `/realisations`, `/carrieres` et `/actu
 - Métadonnées SEO rendues côté serveur (title, description, canonical, Open Graph, Twitter Cards, JSON-LD).
 - Sitemap XML et `robots.txt`.
 - Espace d'administration pour les utilisateurs, les partenaires, les membres de l'équipe et les services.
+- Album photo public avec pagination, visionneuse plein écran et carrousel des dernières photos sur l'accueil.
+- Gestion complète des albums en administration : upload multiple, légendes, couverture, ordre et publication.
 - Carrousel de partenaires et catalogue de services alimentés par la base de données.
 
 ## Configuration

@@ -260,3 +260,52 @@ export interface ContactInfo {
     responseTime: string
     emergency: string
 }
+
+export interface Album {
+    slug: string
+    title: string
+    description: string | null
+    location: string | null
+    event_date: string | null
+    cover_url: string | null
+    photo_count: number
+    url: string
+}
+
+export interface AlbumPhoto {
+    id: number
+    caption: string | null
+    alt: string
+    thumb_url: string | null
+    card_url: string | null
+    large_url: string | null
+}
+
+export interface LatestAlbumPhoto extends AlbumPhoto {
+    album: {
+        title: string
+        slug: string
+        url: string
+        event_date: string | null
+    }
+}
+
+export interface Paginated<T> {
+    current_page: number
+    data: T[]
+    first_page_url: string
+    from: number | null
+    last_page: number
+    last_page_url: string
+    links: Array<{
+        url: string | null
+        label: string
+        active: boolean
+    }>
+    next_page_url: string | null
+    path: string
+    per_page: number
+    prev_page_url: string | null
+    to: number | null
+    total: number
+}

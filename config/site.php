@@ -104,6 +104,12 @@ return [
             'path' => '/services',
             'type' => 'CollectionPage',
         ],
+        'album' => [
+            'title' => 'Album photo',
+            'description' => 'Découvrez en images les chantiers, réalisations et événements de JMC Services S.P.R.L à Durba et dans le Haut-Uélé.',
+            'path' => '/album',
+            'type' => 'CollectionPage',
+        ],
         'contact' => [
             'title' => 'Contact',
             'description' => 'Contactez JMC Services S.P.R.L pour présenter votre projet ou demander une information.',

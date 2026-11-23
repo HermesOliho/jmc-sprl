@@ -37,7 +37,7 @@ const canonicalUrl = computed(() => {
     return `${site.url.replace(/\/$/, '')}${path.startsWith('/') ? path : `/${path}`}`
 })
 const ogImage = computed(() => {
-    const image = props.ogImage ?? site.og_image
+    const image = props.ogImage ?? seo.value.og_image ?? site.og_image
 
     if (!image) {
         return ''

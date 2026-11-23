@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Album;
+use App\Models\AlbumPhoto;
 use App\Models\Partner;
 use App\Models\Service;
 use App\Models\TeamMember;
@@ -23,6 +25,9 @@ class DashboardController extends Controller
                 'active_team_members' => TeamMember::query()->active()->count(),
                 'services' => Service::query()->count(),
                 'active_services' => Service::query()->active()->count(),
+                'albums' => Album::query()->count(),
+                'published_albums' => Album::query()->published()->count(),
+                'photos' => AlbumPhoto::query()->count(),
             ],
         ]);
     }
